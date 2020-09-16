@@ -67,6 +67,8 @@ class Login extends Component {
                             <div class='col-md-4 col-sm-4 col-xs-12'>
                                 <center>
                                     <h3 style={{color: "red", marginBottom: "20px"}}> Sign in to Yelp</h3>
+                                    <div>New to Yelp? <Link to='/customerSignup'>Sign Up</Link></div>
+                                    <div style={{padding: "5px"}}></div>
                                 </center>
                                     <form>
                                         <div class='form-group'>

@@ -56,33 +56,31 @@ class Login extends Component {
         // }
         // console.log(this.props);
         return (
-            <div class='container'>
+            <div class='container' style={{marginTop: "30px"}}>
                 <div class='form-container'>
                 <center>
                 <img src={yelpLoginImage} style={{ height: 'fit-content' }} alt='Yelp' />
                 </center>
-                    <div class='container-fluid'>
+                    <div class='container-fluid' style={{marginTop: "30px"}}>
                         <div class='row'>
                             <div class='col-md-4 col-sm-4 col-xs-12'></div>
                             <div class='col-md-4 col-sm-4 col-xs-12'>
                                 <center>
-                                    <h3 style={{color: "red"}}> Sign in to Yelp</h3>
+                                    <h3 style={{color: "red", marginBottom: "20px"}}> Sign in to Yelp</h3>
                                 </center>
                                     <form>
                                         <div class='form-group'>
-                                            <label for="inputEmail">Email ID</label>
-                                            <input type='text' class='form-control' id='inputEmail' placeholder='Email ID'/>
+                                            <input type='text' class='form-control' id='inputEmail' placeholder='Email ID' pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required/>
                                         </div>
                                         <div class='form-group'>
-                                            <label for="inputEmail">Password</label>
-                                            <input type='password' class='form-control' id='inputEmail' placeholder='password'/>
+                                            <input type='password' class='form-control' id='inputEmail' placeholder='password' required/>
                                         </div>
                                         <div class="checkbox">
                                             <label>
                                                 <input type='checkbox'/> Remember me
                                             </label>
                                         </div>
-                                        <button type='submit' class='btn btn-danger btn-block'> Sign In </button>
+                                        <button type='submit' class='btn btn-danger btn-block' style={{marginTop:"10px"}}> Sign In </button>
                                     </form>
                                 </div>
                                 <div class='col-md-4 col-sm-4 col-xs-12'></div>

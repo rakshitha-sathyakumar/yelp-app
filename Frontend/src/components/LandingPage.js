@@ -6,7 +6,10 @@ import { Form, FormControl, Button, Image } from 'react-bootstrap';
 
 
 var backgroundImagePic = {
-    backgroundImage: `url(${backGroundImage})`
+    backgroundImage: `url(${backGroundImage})`,
+    width: "1450px",
+    height: "820px"
+
 }
 
 
@@ -19,16 +22,18 @@ class LandingPage extends Component {
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', fontWeight: "bold", color: "black"}} variant="link">Write a review</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", fontWeight: "bold", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", fontWeight: "bold", color: "black", outline: 'none'}} variant='link'> Talk </Button>
-                    <Button className="float-right" style={{margin:"25px 15px 25px 850px", backgroundColor: "transparent", fontSize: "20px", fontWeight: "bold", color: "black", border: "1.5px solid black", borderRadius:"5px"}}> Login </Button>
-                    <Button className="float-right" style={{ backgroundColor: "transparent", fontSize: "20px", fontWeight: "bold", color: "black", border: "1.5px solid black", borderRadius:"5px"}}> SignUp </Button>
+                    <Button className="float-right" style={{ margin: "10px 20px", backgroundColor: "transparent", fontSize: "20px", fontWeight: "bold", color: "black", border: "1.5px solid black", borderRadius:"5px"}}> Login </Button>
+                    <Button className="float-right" style={{ margin: "10px 0px", backgroundColor: "transparent", fontSize: "20px", fontWeight: "bold", color: "black", border: "1.5px solid black", borderRadius:"5px"}}> SignUp </Button>
                 </div>
+                <div class='container'>
                     <center>
-                        <Image style= {{margin: "200px 20px 25px 20px"}}src={CustomerCarousel}/>
+                        <Image src={CustomerCarousel}/>
                             <Form inline>
-                                <FormControl style={{ margin: "0 5px 300px 0", width: "350px", height: "30px"}} type="text" placeholder="restaurants, delivery..." className="mr-sm-2"/>
-                                <FormControl style={{width: "300px", height: "30px"}} type='text' placeholder='address..' className="mr-sm-3"/>
+                                <FormControl style={{marginLeft: "250px", width: "350px", height: "30px"}} type="text" placeholder="restaurants, delivery..."/>
+                                <FormControl style={{marginLeft: "5px", width: "300px", height: "30px"}} type='text' placeholder='address..'/>
                             </Form>
                     </center>
+                </div>
             </div>
         )
     }

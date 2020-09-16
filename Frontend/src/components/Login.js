@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { userLogin } from '../actions/loginAction'
-import grubhubLoginImage from '../images/GrubhubLoginImage.png';
+// import { connect } from 'react-redux';
+// import { userLogin } from '../actions/loginAction'
+import yelpLoginImage from './images/yelp_logo.jpg';
 import { Row, Col } from 'react-bootstrap';
 
 class Login extends Component {
@@ -38,69 +38,61 @@ class Login extends Component {
     // }
 
     render() {
-        console.log(this.props);
-        let redirectVar = null;
-        let message = ""
-        if(this.props.user && this.props.user.user_id){
-            localStorage.setItem("email_id", this.props.user.email_id);
-            localStorage.setItem("is_owner", this.props.user.is_owner);
-            localStorage.setItem("user_id", this.props.user.user_id);
-            localStorage.setItem("name", this.props.user.name);
-            redirectVar = <Redirect to="/home" />
-        }
-        else if(this.props.user === "NO_USER" && this.state.loginFlag){
-            message = "No user with this email id";
-        }
-        else if(this.props.user === "INCORRECT_PASSWORD" && this.state.loginFlag){
-            message = "Incorrect Password";
-        }
-  
-        console.log(this.props);
+        // console.log(this.props);
+        // let redirectVar = null;
+        // let message = ""
+        // if(this.props.user && this.props.user.user_id){
+        //     localStorage.setItem("email_id", this.props.user.email_id);
+        //     localStorage.setItem("is_owner", this.props.user.is_owner);
+        //     localStorage.setItem("user_id", this.props.user.user_id);
+        //     localStorage.setItem("name", this.props.user.name);
+        //     redirectVar = <Redirect to="/home" />
+        // }
+        // else if(this.props.user === "NO_USER" && this.state.loginFlag){
+        //     message = "No user with this email id";
+        // }
+        // else if(this.props.user === "INCORRECT_PASSWORD" && this.state.loginFlag){
+        //     message = "Incorrect Password";
+        // }
+        // console.log(this.props);
         return (
-            <div>
-                {redirectVar}
-                <div>
-                    <Row>
-                        <Col>
-                            <img src={grubhubLoginImage} style={{ height: 'fit-content' }} alt='GrubHub' />
-                        </Col>
-                        <Col>
-                            <div>
-                                <div class="login-form">
-                                    <div class="main-div">
-                                        <div class="panel">
-                                            <h2>Signin with your Grubhub account</h2>
-                                        </div><br/>
-                                        <form onSubmit={this.onSubmit}>
-                                            <div style={{ color: "#ff0000" }}>{message}</div><br />
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" onChange={this.onChange} name="email_id" placeholder="Email Id" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control" onChange={this.onChange} name="password" placeholder="Password" required />
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Signin</button><br /><br />
-                                            <div><center><Link to="/signup">Create new account</Link></center></div>
-                                        </form>
-                                    </div>
+            <div class='container'>
+                <div class='form-container'>
+                <center>
+                <img src={yelpLoginImage} style={{ height: 'fit-content' }} alt='Yelp' />
+                </center>
+                    <div class='container-fluid'>
+                        <div class='row'>
+                            <div class='col-md-4 col-sm-4 col-xs-12'></div>
+                            <div class='col-md-4 col-sm-4 col-xs-12'>
+                                <center>
+                                    <h3 style={{color: "red"}}> Sign in to Yelp</h3>
+                                </center>
+                                    <form>
+                                        <div class='form-group'>
+                                            <label for="inputEmail">Email ID</label>
+                                            <input type='text' class='form-control' id='inputEmail' placeholder='Email ID'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for="inputEmail">Password</label>
+                                            <input type='password' class='form-control' id='inputEmail' placeholder='password'/>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type='checkbox'/> Remember me
+                                            </label>
+                                        </div>
+                                        <button type='submit' class='btn btn-danger btn-block'> Sign In </button>
+                                    </form>
                                 </div>
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-            </div>
+                                <div class='col-md-4 col-sm-4 col-xs-12'></div>
+                        </div>
+                    </div> 
+            </div>  
+        </div>
         )
     }
 }
 
-Login.propTypes = {
-    userLogin: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => { 
-    return ({
-    user: state.login.user
-})};
-
-export default connect(mapStateToProps, { userLogin })(Login);
+export default Login;
+// export default connect(mapStateToProps, { userLogin })(Login);

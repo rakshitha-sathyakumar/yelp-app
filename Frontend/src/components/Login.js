@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 // import { connect } from 'react-redux';
 // import { userLogin } from '../actions/loginAction'
 import yelpLoginImage from './images/yelp_logo.jpg';
-import { Row, Col } from 'react-bootstrap';
+//import { Row, Col } from 'react-bootstrap';
 
 class Login extends Component {
     //call the constructor method
@@ -13,34 +14,48 @@ class Login extends Component {
         //Call the constrictor of Super class i.e The Component
         super(props);
         //maintain the state required for this component
-        this.state = {};
+        this.state = {
+            email: " ",
+            password: " ",
+            loginFlag: " "
+        };
     }
 
-    // onChange = (e) => {
-    //     this.setState({
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
+    onChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
-    // //submit Login handler to send a request to the node backend
-    // onSubmit = (e) => {
-    //     e.preventDefault();
-    //     const data = {
-    //         email_id: this.state.email_id,
-    //         password: this.state.password
-    //     }
-
-    //     this.props.userLogin(data);
-
-    //     this.setState({
-    //         loginFlag: 1
-    //     });
-    // }
-
+    //submit Login handler to send a request to the node backend
+    onSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        return axios.post('http://localhost:3001/yelp/login',data)
+        .then((response) => {
+            console.log(response);
+            if (response.data.email && response.data.password) {
+                console.log("Login successful")
+            } 
+            if (response.data === "NO_USER") {
+                console.log("Enter a valid email")
+            } 
+            if(response.data === "INCORRECT_PASSWORD")
+            {
+                console.log("Enter the right password")
+            }
+           })
+        .catch(function(error) {
+            window.location = "/create"
+        })
+    }
     render() {
-        // console.log(this.props);
-        // let redirectVar = null;
-        // let message = ""
+        console.log(this.props);
+        let redirectVar = null;
+        let message = ""
         // if(this.props.user && this.props.user.user_id){
         //     localStorage.setItem("email_id", this.props.user.email_id);
         //     localStorage.setItem("is_owner", this.props.user.is_owner);
@@ -48,13 +63,13 @@ class Login extends Component {
         //     localStorage.setItem("name", this.props.user.name);
         //     redirectVar = <Redirect to="/home" />
         // }
-        // else if(this.props.user === "NO_USER" && this.state.loginFlag){
-        //     message = "No user with this email id";
-        // }
-        // else if(this.props.user === "INCORRECT_PASSWORD" && this.state.loginFlag){
-        //     message = "Incorrect Password";
-        // }
-        // console.log(this.props);
+        if(this.props.user === "NO_USER" && this.state.loginFlag){
+            message = "No user with this email id";
+        }
+        else if(this.props.user === "INCORRECT_PASSWORD" && this.state.loginFlag){
+            message = "Incorrect Password";
+        }
+        console.log(this.props);
         return (
             <div class='container' style={{marginTop: "30px"}}>
                 <div class='form-container'>
@@ -70,12 +85,12 @@ class Login extends Component {
                                     <div>New to Yelp? <Link to='/customerSignup'>Sign Up</Link></div>
                                     <div style={{padding: "5px"}}></div>
                                 </center>
-                                    <form>
+                                    <form onSubmit={this.onSubmit}>
                                         <div class='form-group'>
-                                            <input type='text' class='form-control' id='inputEmail' placeholder='Email ID' pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required/>
+                                            <input type='text' onChange={this.onChange} name='email' class='form-control' id='inputEmail' placeholder='Email ID' pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required/>
                                         </div>
                                         <div class='form-group'>
-                                            <input type='password' class='form-control' id='inputEmail' placeholder='password' required/>
+                                            <input type='password' onChange={this.onChange} name='password' class='form-control' id='inputEmail' placeholder='password' required/>
                                         </div>
                                         <div class="checkbox">
                                             <label>

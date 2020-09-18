@@ -4,6 +4,7 @@ import LandingPage from './LandingPage';
 import Login from './Login';
 import CustomerSignup from './SignUp/customerSignup';
 import OwnerSignup from './SignUp/ownerSignup';
+//import Restaurant from './Restaurant/restaurant';
 
 
 class Main extends Component {
@@ -14,6 +15,7 @@ class Main extends Component {
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/customerSignup" component={CustomerSignup}/>
                 <Route exact path="/ownerSignup" component={OwnerSignup}/>
+                {/* <Route exact path="/restaurant" component={Restaurant}/> */}
             </div>
         )
     }

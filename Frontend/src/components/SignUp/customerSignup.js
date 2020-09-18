@@ -92,7 +92,7 @@ class CustomerSignup extends Component {
                                         </div>
                                         <div style={{ color: "#ff0000" }}>{message}</div>
                                         <button style = {{width: "200px"}} type="submit" class="btn btn-danger">Signup</button><br /><br />
-                                        <div><Link to='/ownersignup'>Signup as Restaurant Owner</Link></div><br />
+                                        <div><Link to='/restaurantsignup'>Signup as Restaurant Owner</Link></div><br />
                                         <div>Already have an account? <Link to='/login'>Login</Link></div>
                                     </form>
                                 </div>

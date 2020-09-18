@@ -6,46 +6,56 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import YelpImage from './../images/yelp_logo.jpg'
+import axios from 'axios';
 
 class CustomerSignup extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {};
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: " ",
+            password: " ",
+            name: " ",
+            signupFlag: " "
 
-    // onChange = (e) => {
-    //     this.setState({
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
+        };
+    }
+
+    onChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
 
-    // onSubmit = (e) => {
-    //     //prevent page from refresh
-    //     e.preventDefault();
-    //     const data = {
-    //         name: this.state.name,
-    //         email_id: this.state.email_id,
-    //         password: this.state.password,
-    //         address: this.state.address,
-    //         phone_number: this.state.phone_number
-    //     }
-
-    //     this.props.customerSignup(data);
-
-    //     this.setState({
-    //         signupFlag: 1
-    //     });
-    // }
+    onSubmit = (e) => {
+        //prevent page from refresh
+        e.preventDefault();
+        const data = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+        }
+        return axios.post('http://localhost:3001/yelp/customerSignUp', data)
+        .then((response) => {
+            if (response.status === 'USER_ADDED') {
+                window.location = "/login"
+            }
+            if (response.status === 'USER_EXISTS') {
+                this.setState({
+                    signupFlag: "Email ID is already registered!"
+                })
+            }
+        });
+    }
 
     render() {
         //redirect based on successful signup
         let redirectVar = null;
         let message = "";
-        if (localStorage.getItem("user_id")) {
-            redirectVar = <Redirect to="/Home" />
-        }
-        else if (this.props.user === "USER_ADDED" && this.state.signupFlag) {
+        // if (localStorage.getItem("user_id")) {
+        //     redirectVar = <Redirect to="/Home" />
+        // }
+        if (this.props.user === "USER_ADDED" && this.state.signupFlag) {
             alert("You have registered successfully");
             redirectVar = <Redirect to="/Login" />
         }
@@ -74,14 +84,15 @@ class CustomerSignup extends Component {
                                             <input type="text" class="form-control" name="name" onChange={this.onChange} placeholder="Name" pattern="^[A-Za-z0-9 ]+$" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email_id" onChange={this.onChange} placeholder="Email Id" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required />
+                                            <input type="email" class="form-control" name="email" onChange={this.onChange} placeholder="Email Id" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required />
                                         </div>
+                                        <div style={{ fontSize: 10, color: "red"}}> {this.state.signupFlag}</div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" name="password" onChange={this.onChange} placeholder="Password" required />
                                         </div>
                                         <div style={{ color: "#ff0000" }}>{message}</div>
                                         <button style = {{width: "200px"}} type="submit" class="btn btn-danger">Signup</button><br /><br />
-                                        <div><Link to='/ownersignup'>Signup as Restaurant Owner</Link></div><br />
+                                        <div><Link to='/restaurantsignup'>Signup as Restaurant Owner</Link></div><br />
                                         <div>Already have an account? <Link to='/login'>Login</Link></div>
                                     </form>
                                 </div>

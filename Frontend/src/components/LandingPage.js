@@ -21,7 +21,7 @@ class LandingPage extends Component {
         return (
             <div style={backgroundImagePic}>
                 <div>
-                    <Button href = '/navigation' style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
+                    <Button href = '/profile' style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Talk </Button>
                     <a href ='/login' class="btn bg-transparent float-right" style={{marginTop: "25px", marginRight: "45px", border: "1px solid black"}} role="button"> Login </a>

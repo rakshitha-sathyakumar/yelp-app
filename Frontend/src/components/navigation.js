@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import yelpLoginImage from './images/yelp_logo.jpg';
-import {Button} from 'react-bootstrap';
+import {Button, Jumbotron} from 'react-bootstrap';
 
 class Navigationbar extends Component {
 
@@ -12,6 +12,7 @@ class Navigationbar extends Component {
 
 render() {
     return (
+    <div >
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="/">
                 <img src = {yelpLoginImage} width="150" height="85" alt=""/>
@@ -26,6 +27,7 @@ render() {
             <button style ={{ fontSize: "20px", border: "none", backgroundColor: "transparent", cursor: "pointer"}} type="submit"><i class='far fa-user-circle'></i></button>
             </form>
         </nav>
+    </div>
     )
 }
 }

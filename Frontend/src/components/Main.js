@@ -7,7 +7,9 @@ import RestaurantSignup from './SignUp/restaurantSignup';
 import Navigationbar from './navigation';
 import userProfile from './user/profile';
 import BasicDetails from './user/profileUpdate';
-//import Restaurant from './Restaurant/restaurant';
+import RestaurantPage from './restaurant/restaurantLanding';
+import updateRest from './restaurant/updateRestaurant';
+import updateDishes from './restaurant/dishes';
 
 
 class Main extends Component {
@@ -21,7 +23,9 @@ class Main extends Component {
                 <Route exact path="/navigation" component={Navigationbar}/>
                 <Route exact path="/userProfile" component={userProfile}/>
                 <Route exact path="/update" component={BasicDetails}/>
-                {/* <Route exact path="/restaurant" component={Restaurant}/> */}
+                <Route exact path="/restaurant" component={RestaurantPage}/>
+                <Route exact path="/updateRestaurant" component={updateRest}/>
+                <Route exact path="/updateDish" component={updateDishes}/>
             </div>
         )
     }

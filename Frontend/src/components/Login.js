@@ -3,10 +3,9 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-// import { connect } from 'react-redux';
-// import { userLogin } from '../actions/loginAction'
+import { connect } from 'react-redux';
+import { userLogin } from '../actions/loginAction'
 import yelpLoginImage from './images/yelp_logo.jpg';
-//import { Row, Col } from 'react-bootstrap';
 
 class Login extends Component {
     //call the constructor method
@@ -14,11 +13,7 @@ class Login extends Component {
         //Call the constrictor of Super class i.e The Component
         super(props);
         //maintain the state required for this component
-        this.state = {
-            email: " ",
-            password: " ",
-            loginFlag: " "
-        };
+        this.state = {};
     }
 
     onChange = (e) => {
@@ -34,23 +29,28 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        return axios.post('http://localhost:3001/yelp/login',data)
-        .then((response) => {
-            console.log(response);
-            if (response.data.email && response.data.password) {
-                console.log("Login successful")
-            } 
-            if (response.data === "NO_USER") {
-                console.log("Enter a valid email")
-            } 
-            if(response.data === "INCORRECT_PASSWORD")
-            {
-                console.log("Enter the right password")
-            }
-           })
-        .catch(function(error) {
-            window.location = "/create"
-        })
+
+        this.props.userLogin(data);
+        this.setState({
+            loginFlag: 1
+        });
+        // return axios.post('http://localhost:3001/yelp/login',data)
+        // .then((response) => {
+        //     console.log(response);
+        //     if (response.data.email && response.data.password) {
+        //         console.log("Login successful")
+        //     } 
+        //     if (response.data === "NO_USER") {
+        //         console.log("Enter a valid email")
+        //     } 
+        //     if(response.data === "INCORRECT_PASSWORD")
+        //     {
+        //         console.log("Enter the right password")
+        //     }
+        //    })
+        // .catch(function(error) {
+        //     window.location = "/create"
+        // })
     }
     render() {
         console.log(this.props);
@@ -109,5 +109,14 @@ class Login extends Component {
     }
 }
 
-export default Login;
-// export default connect(mapStateToProps, { userLogin })(Login);
+Login.propTypes = {
+    userLogin: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => { 
+    return ({
+    user: state.login.user
+})};
+
+export default connect(mapStateToProps, { userLogin })(Login);

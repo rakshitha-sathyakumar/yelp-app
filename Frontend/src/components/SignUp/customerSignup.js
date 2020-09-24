@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { customerSignup } from '../../actions/signupActions'
+import { connect } from 'react-redux';
+import { customerSignup } from '../../actions/signupAction'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
@@ -11,13 +11,7 @@ import axios from 'axios';
 class CustomerSignup extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            email: " ",
-            password: " ",
-            name: " ",
-            signupFlag: " "
-
-        };
+        this.state = {};
     }
 
     onChange = (e) => {
@@ -35,17 +29,25 @@ class CustomerSignup extends Component {
             email: this.state.email,
             password: this.state.password,
         }
-        return axios.post('http://localhost:3001/yelp/customerSignUp', data)
-        .then((response) => {
-            if (response.status === 'USER_ADDED') {
-                window.location = "/login"
-            }
-            if (response.status === 'USER_EXISTS') {
-                this.setState({
-                    signupFlag: "Email ID is already registered!"
-                })
-            }
+
+        this.props.customerSignup(data);
+
+        this.setState({
+            signupFlag: 1
         });
+
+
+    //     return axios.post('http://localhost:3001/yelp/customerSignUp', data)
+    //     .then((response) => {
+    //         if (response.status === 'USER_ADDED') {
+    //             window.location = "/login"
+    //         }
+    //         if (response.status === 'USER_EXISTS') {
+    //             this.setState({
+    //                 signupFlag: "Email ID is already registered!"
+    //             })
+    //         }
+    //     });
     }
 
     render() {
@@ -56,7 +58,7 @@ class CustomerSignup extends Component {
         //     redirectVar = <Redirect to="/Home" />
         // }
         if (this.props.user === "USER_ADDED" && this.state.signupFlag) {
-            alert("You have registered successfully");
+            // alert("You have registered successfully");
             redirectVar = <Redirect to="/Login" />
         }
         else if(this.props.user === "USER_EXISTS" && this.state.signupFlag){
@@ -103,14 +105,14 @@ class CustomerSignup extends Component {
     }
 }
 
-// CustomerSignup.propTypes = {
-//     customerSignup: PropTypes.func.isRequired,
-//     user: PropTypes.object.isRequired
-// };
+CustomerSignup.propTypes = {
+    customerSignup: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+};
 
-// const mapStateToProps = state => ({
-//     user: state.signup.user
-// });
+const mapStateToProps = state => ({
+    user: state.signup.user
+});
 
-export default CustomerSignup;
-//export default connect(mapStateToProps, { customerSignup })(CustomerSignup);
+// export default CustomerSignup;
+export default connect(mapStateToProps, { customerSignup })(CustomerSignup);

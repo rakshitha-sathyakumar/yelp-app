@@ -3,8 +3,6 @@ import Navigationbar from '../navigation';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import PropTypes from 'prop-types';
 import profilepic from './../images/download.png'
-// import { connect } from 'react-redux';
-// import { customerSignup } from '../../actions/signupActions'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { UserProfileNavBar, UserProfileJumbo, NavList, Form, Button, MDBInput, Carousel} from 'react-bootstrap';

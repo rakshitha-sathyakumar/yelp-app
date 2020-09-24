@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { customerSignup } from '../../actions/signupActions'
+import { connect } from 'react-redux';
+import { restaurantSignup } from '../../actions/signupAction'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
@@ -11,14 +11,7 @@ import axios from 'axios';
 class RestaurantSignup extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: " ",
-            email: " ",
-            password: " ",
-            address: " ",
-            zipcode: " ",
-            signUpFlag: " "
-        };
+        this.state = {};
     }
 
     onChange = (e) => {
@@ -38,17 +31,23 @@ class RestaurantSignup extends Component {
             address: this.state.address,
             zipcode: this.state.zipcode,
         }
-        return axios.post('http://localhost:3001/yelp/restSignUp', data)
-        .then((response) => {
-            if (response.status === 'RESTAURANT_ADDED') {
-                window.location = "/login"
-            }
-            if (response.status === 'RESTAURANT_EXISTS') {
-                this.setState({
-                    signUpFlag: "Email ID is already registered!"
-                })
-            }
+
+        this.props.restaurantSignup(data);
+
+        this.setState({
+            signupFlag: 1
         });
+        // return axios.post('http://localhost:3001/yelp/restSignUp', data)
+        // .then((response) => {
+        //     if (response.status === 'RESTAURANT_ADDED') {
+        //         window.location = "/login"
+        //     }
+        //     if (response.status === 'RESTAURANT_EXISTS') {
+        //         this.setState({
+        //             signUpFlag: "Email ID is already registered!"
+        //         })
+        //     }
+        // });
     }
 
     render() {
@@ -107,4 +106,15 @@ class RestaurantSignup extends Component {
     }
 }
 
-export default RestaurantSignup;
+
+RestaurantSignup.propTypes = {
+    restaurantSignup: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    user: state.signup.user
+});
+
+export default connect(mapStateToProps, { restaurantSignup})(RestaurantSignup);
+// export default RestaurantSignup;

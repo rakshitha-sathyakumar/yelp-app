@@ -20,7 +20,8 @@ router.post('/', (req, res) => {
         if (result[0][0].user_id) {
           let userObject = {
             user_id: result[0][0].user_id,
-            name: result[0][0].name,
+            first_name: result[0][0].first_name,
+            last_name: result[0][0].last_name,
             email: result[0][0].email,
           };
           res.end(JSON.stringify(userObject))

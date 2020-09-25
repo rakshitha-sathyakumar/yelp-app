@@ -4,7 +4,7 @@ const router = express.Router();
 const pool = require('../pool.js');
 
 router.post('/', (req, res) => {
-    let sql = `CALL add_customer('${req.body.name}', '${req.body.email}', '${req.body.password}');`;
+    let sql = `CALL add_customer('${req.body.first_name}', '${req.body.last_name}','${req.body.email}', '${req.body.password}');`;
   
     pool.query(sql, (err, result) => {
         console.log(result);

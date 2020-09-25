@@ -10,6 +10,7 @@ import BasicDetails from './user/profileUpdate';
 import RestaurantPage from './restaurant/restaurantLanding';
 import updateRest from './restaurant/updateRestaurant';
 import updateDishes from './restaurant/dishes';
+import HomePage from './home';
 
 
 class Main extends Component {
@@ -17,6 +18,7 @@ class Main extends Component {
         return (
             <div>
                 <Route exact path="/" component={LandingPage} />
+                <Route exact path="/home" component={HomePage} />
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/customerSignup" component={CustomerSignup}/>
                 <Route exact path="/restaurantSignup" component={RestaurantSignup}/>

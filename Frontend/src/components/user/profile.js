@@ -14,7 +14,13 @@ import axios from 'axios';
 class userProfile extends Component {
     constructor(props) {
         super(props);
-        this.state= {}
+        this.state= {};
+        this.onChange = this.onChange.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.getCustomer();
     }
 
     render() {

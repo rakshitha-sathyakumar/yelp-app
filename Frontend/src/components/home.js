@@ -15,7 +15,8 @@ var backgroundImagePic = {
 }
 
 
-class LandingPage extends Component {
+
+class HomePage extends Component {
     render() {
         return (
             <div style={backgroundImagePic}>
@@ -23,8 +24,11 @@ class LandingPage extends Component {
                     <Button href = '/userProfile' style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
                     <Button href='/restaurant' style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Talk </Button>
-                    <a href ='/login' class="btn bg-transparent float-right" style={{marginTop: "25px", marginRight: "45px", border: "1px solid black"}} role="button"> Login </a>
-                    <a href ='/customerSignup' class="btn bg-transparent float-right" style={{marginTop:"25px", marginRight: "10px", border: "1px solid black"}}role="button"> Sign Up </a>
+                    {/* <Button  style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}}> <i class='far fa-user-circle'></i> Profile </Button> */}
+                    {/* // <button style ={{ fontSize: "20px", border: "none", backgroundColor: "transparent", cursor: "pointer"}} type="submit"><i class='far fa-user-circle'></i></button> */}
+                    
+                    <a href ='/' class="btn bg-transparent float-right" style={{marginTop: "25px", marginRight: "45px"}} role="button"> Logout </a>
+                    <a href ='/userProfile' class="btn bg-transparent float-right" style={{marginTop: "25px", marginRight: "0px", color:"black", fontSize: "20px"}} role="button"><i class='far fa-user-circle'></i></a>
                 </div>
                 <div class='container'>
                     <center>
@@ -41,4 +45,4 @@ class LandingPage extends Component {
     }
 }
 
-export default LandingPage;
+export default HomePage;

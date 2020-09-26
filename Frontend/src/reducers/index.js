@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-// import customerProfileReducer from './customerProfileReducer'
+import userProfileReducer from './userProfileReducer';
 // import ownerProfileReducer from './ownerProfileReducer'
 import loginReducer from './loginReducer';
 import signupReducer from './signupReducer';
 
 export default combineReducers({
     login: loginReducer,
-    signup: signupReducer
-    // customerProfile: customerProfileReducer,
+    signup: signupReducer,
+    userProfile: userProfileReducer
     // ownerProfile: ownerProfileReducer
 });

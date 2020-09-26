@@ -3,8 +3,8 @@ import Navigationbar from '../navigation';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import PropTypes from 'prop-types';
 import profilepic from './../images/download.png'
-// import { connect } from 'react-redux';
-// import { customerSignup } from '../../actions/signupActions'
+import { connect } from 'react-redux';
+import { getUser, updateUser } from '../../actions/userProfileAction';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Jumbotron, CardImg} from 'react-bootstrap';
@@ -14,10 +14,34 @@ import axios from 'axios';
 class userProfile extends Component {
     constructor(props) {
         super(props);
-        this.state= {}
+        this.state = {};
+        this.onChange = this.onChange.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
     }
 
+    componentWillMount() {
+        this.props.getUser();
+        // console.log(this.props)
+    }
+
+    onChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onUpdate = (e) => {
+        //prevent page from refresh
+        e.preventDefault();
+
+        let data = Object.assign({}, this.state);
+        this.props.updateUser(data);
+    };
+
+
     render() {
+        console.log("hi")
+        console.log(this.props);
         return (
         <div style={{margin:"5px"}}>
             <Navigationbar />
@@ -34,9 +58,9 @@ class userProfile extends Component {
                             </card>
                         </div>
                         <div class='col-xs-4 profileName' style={{position: "relative", marginLeft: "250px"}}>
-                            <h1>Rakshitha Sathyakumar</h1>
-                            <h6> "I eat and I know things" </h6>
-                            <p style={{fontSize:"13px"}}>rakshu595@gmail.com</p>
+                            <h1>{this.props.user.first_name} {this.props.user.last_name}</h1>
+                            <h6> "{this.props.user.headline}" </h6>
+                            <p style={{fontSize:"13px"}}>{this.props.user.email}</p>
                             
                         </div>
                         
@@ -89,28 +113,28 @@ class userProfile extends Component {
                     <h3 style={{color:'red'}}> Basic Information</h3>
                     <hr />
                     <h5 style={{margin:"0px"}}> Contact Information</h5>
-                    <p> +1 (669) 212-1208</p>
+                    <p> {this.props.user.contactNo}</p>
                     <h5 style={{margin:"0px"}}> Gender </h5>
-                    <p>Female </p>
+                    <p>{this.props.user.gender} </p>
                     <h5 style={{margin:"0px"}}> Address</h5>
-                    <p> 33 S Third Street, San Jose, CA-95113</p>
+                    <p> {this.props.user.address}</p>
                     <h5 style={{margin:"0px"}}> Birthday </h5>
-                    <p> September 5 1995</p>
+                    <p> {this.props.user.dateofbirth}</p>
                 </div>
                 <div class='col-xs-12' style={{textAlign: "left", height: "100%", borderLeft: "1px solid #e6e6e6", marginLeft: "400px"}}>
                     <div style={{marginLeft: "10px"}}>
                         <h3 style={{color:'red'}}> About</h3>
                         <hr />
                         <h6 style={{margin:"0px"}}> Nickname </h6>
-                        <p> Rakshu</p>
+                        <p> {this.props.user.nickname}</p>
                         <h6 style={{margin:"0px"}}> Yelping since </h6>
-                        <p> May 2017</p>
+                        <p> {this.props.user.yelpingsince}</p>
                         <h6 style={{margin:"0px"}}> When I am not yelping... </h6>
-                        <p> Star gazing </p>
+                        <p> {this.props.user.notyelping} </p>
                         <h6 style={{margin:"0px"}}> Things I love </h6>
-                        <p> Food, puppies, dogs, animals, aircraft</p>
+                        <p> {this.props.user.thingsilove}</p>
                         <h6 style={{margin:"0px"}}> My Blog or Website</h6>
-                        <p> www.google.com</p>
+                        <p>{this.props.user.website}</p>
                     </div>
                 </div>
                 </div>
@@ -118,4 +142,16 @@ class userProfile extends Component {
     )}
 }
 
-export default userProfile;
+userProfile.propTypes = {
+    getUser: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => { 
+    return ({
+    user: state.userProfile.user
+})};
+
+export default connect(mapStateToProps, { getUser })(userProfile);
+
+// export default userProfile;

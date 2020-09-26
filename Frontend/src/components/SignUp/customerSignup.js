@@ -25,7 +25,8 @@ class CustomerSignup extends Component {
         //prevent page from refresh
         e.preventDefault();
         const data = {
-            name: this.state.name,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
             email: this.state.email,
             password: this.state.password,
         }
@@ -83,7 +84,10 @@ class CustomerSignup extends Component {
                                     </div>
                                     <form onSubmit={this.onSubmit}>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="name" onChange={this.onChange} placeholder="Name" pattern="^[A-Za-z0-9 ]+$" required />
+                                            <input type="text" class="form-control" name="first_name" onChange={this.onChange} placeholder="First name" pattern="^[A-Za-z0-9 ]+$" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="last_name" onChange={this.onChange} placeholder="Last name" pattern="^[A-Za-z0-9 ]+$" required />
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control" name="email" onChange={this.onChange} placeholder="Email Id" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$'%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])$" title="Please enter valid email address" required />

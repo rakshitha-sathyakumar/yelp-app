@@ -15,7 +15,6 @@ var backgroundImagePic = {
 }
 
 
-
 class LandingPage extends Component {
     render() {
         return (

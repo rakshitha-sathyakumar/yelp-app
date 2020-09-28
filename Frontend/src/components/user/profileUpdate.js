@@ -46,7 +46,7 @@ handleUpdate = (e) => {
         }
 
   this.props.updateUser(data);
-  console.log(this.props.user.email)
+  console.log(this.props)
 };
     render() {
       let redirectVar = null;

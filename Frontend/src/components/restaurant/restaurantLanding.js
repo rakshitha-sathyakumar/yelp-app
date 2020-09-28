@@ -108,7 +108,7 @@ class RestaurantPage extends Component {
                         <i class='fas fa-id-card'></i></span> Update your profile 
                 </a>
                 <hr />
-                <a href='/updateDish'>
+                <a href='/addDish'>
                 <span>
                 <i class="far fa-plus-square"></i></span> Add/Edit dishes</a>
             </div>

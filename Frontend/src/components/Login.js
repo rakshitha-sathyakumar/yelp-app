@@ -44,7 +44,17 @@ class Login extends Component {
             localStorage.setItem("first_name", this.props.user.first_name);
             localStorage.setItem("user_id", this.props.user.user_id);
             localStorage.setItem("last_name", this.props.user.last_name);
+            localStorage.setItem("rest_name", this.props.user.name);
+            localStorage.setItem("rest_id", this.props.user.rest_id);
+            
             redirectVar = <Redirect to="/home" />
+        } else if (this.props.user && this.props.user.rest_id)
+        {
+            localStorage.setItem("rest_id", this.props.user.rest_id);
+            localStorage.setItem("rest_name", this.props.user.name);
+            localStorage.setItem("rest_email", this.props.user.email);
+
+            redirectVar =<Redirect to="/restaurant" />
         }
         if(this.props.user === "NO_USER" && this.state.loginFlag){
             message = "No user with this email id";

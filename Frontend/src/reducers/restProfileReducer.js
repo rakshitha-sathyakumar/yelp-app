@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_USER } from '../actions/types';
+import { GET_RESTAURANT, UPDATE_RESTAURANT } from '../actions/types';
 
  const initialState = {
      user: {}
@@ -6,12 +6,12 @@ import { GET_USER, UPDATE_USER } from '../actions/types';
 
  export default function(state = initialState, action) {
     switch(action.type){
-        case GET_USER:
+        case GET_RESTAURANT:
             return {
                 ...state,
                 user: action.payload
             };
-        case UPDATE_USER:
+        case UPDATE_RESTAURANT:
             return {
                 ...state,
                 user: action.payload

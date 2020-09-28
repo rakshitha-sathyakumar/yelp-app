@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import Navigationbar from '../navigation';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import PropTypes from 'prop-types';
+import { getRest, updateRest } from '../../actions/restProfileActions';
 import profilepic from './../images/download.png'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import { UserProfileNavBar, UserProfileJumbo, NavList, Form, Button, MDBInput, Carousel} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Button, Carousel} from 'react-bootstrap';
 import rest1 from './../images/rest1.jpg'
 import rest2 from './../images/rest2.jpg'
 import food1 from './../images/food1.jpg'
@@ -14,7 +16,31 @@ import axios from 'axios';
 
 
 class RestaurantPage extends Component {
-    state = {};
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.onChange = this.onChange.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.getRest();
+        // console.log(this.props)
+    }
+
+    onChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onUpdate = (e) => {
+        //prevent page from refresh
+        e.preventDefault();
+
+        let data = Object.assign({}, this.state);
+        this.props.updateRest(data);
+    };
     render() {
       return (
         <React.Fragment>
@@ -38,8 +64,8 @@ class RestaurantPage extends Component {
             <div class="row">
             <div class="col-xs-4" style={{marginLeft: "50px", textAlign: "top"}}>
                 <br />
-                <h1 style={{fontWeight: "bolder", margin:"0"}}> House of Bagels</h1>
-                <p> 505 E San Carlos St, San Jose, CA 95112</p>
+                <h1 style={{fontWeight: "bolder", margin:"0"}}> {this.props.user.name}</h1>
+                <p> {this.props.user.address}</p>
                 <i class='fas fa-star' style={{color: "red"}}></i>
                 <i class='fas fa-star' style={{color: "red"}}></i>
                 <i class='fas fa-star' style={{color: "red"}}></i>
@@ -72,10 +98,10 @@ class RestaurantPage extends Component {
             </div>
             <div class="col-xs-8" class="float-right" style={{marginLeft:"300px", marginTop: "20px"}}>
                 <p>
-                <i class='fas fa-phone'></i> (408) 294-6615</p>
+                <i class='fas fa-phone'></i> {this.props.user.contact_info}</p>
                 <hr />
                 <p>
-                <i class='fas fa-envelope'></i>  houseofbagels@gmaill.com</p>
+                <i class='fas fa-envelope'></i> {this.props.user.email}</p>
                 <hr/>
                 <a href='/updateRestaurant'>
                     <span>
@@ -92,4 +118,16 @@ class RestaurantPage extends Component {
     }
   }
 
-  export default RestaurantPage;
+  RestaurantPage.propTypes = {
+    getRest: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => { 
+    return ({
+    user: state.restProfile.user
+})};
+
+export default connect(mapStateToProps, { getRest })(RestaurantPage);
+
+// export default userProfile;

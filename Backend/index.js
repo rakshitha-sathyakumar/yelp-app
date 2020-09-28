@@ -4,11 +4,13 @@ const login = require("./routes/login");
 const custSignup = require("./routes/customerSignUp");
 const restSignup = require("./routes/restSignUp");
 const userProfile = require("./routes/profile");
+const restProfile = require("./routes/restaurant");
 
 app.use("/yelp/login", login);
 app.use("/yelp/customerSignUp", custSignup);
 app.use("/yelp/restSignUp", restSignup);
 app.use("/yelp/userProfile", userProfile);
+app.use("/yelp/restProfile", restProfile);
 
 const port = process.env.PORT || 3001;
 var server = app.listen(port, () => {

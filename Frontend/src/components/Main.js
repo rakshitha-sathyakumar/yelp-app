@@ -10,6 +10,10 @@ import BasicDetails from './user/profileUpdate';
 import RestaurantPage from './restaurant/restaurantLanding';
 import updateRest from './restaurant/updateRestaurant';
 import updateDishes from './restaurant/addDishes';
+import viewDish from './restaurant/viewDishes';
+import dishList from './restaurant/viewDishList';
+import viewEvents from './restaurant/events';
+import addEvent from './restaurant/addEvents';
 import HomePage from './home';
 
 
@@ -28,6 +32,10 @@ class Main extends Component {
                 <Route exact path="/restaurant" component={RestaurantPage}/>
                 <Route exact path="/updateRestaurant" component={updateRest}/>
                 <Route exact path="/addDish" component={updateDishes}/>
+                <Route exact path="/viewDish" component={viewDish}/>
+                <Route exact path="/dishList" component={dishList}/>
+                <Route exact path="/events" component={viewEvents}/>
+                <Route exact path="/addEvent" component={addEvent}/>
             </div>
         )
     }

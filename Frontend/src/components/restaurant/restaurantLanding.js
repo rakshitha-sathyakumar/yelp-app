@@ -78,7 +78,7 @@ class RestaurantPage extends Component {
                 <div class="inline-block">
                 <Button href = '/userProfile' style = {{backgroundColor: "red", fontSize: "20px", border: '1px solid red', color: "white"}} variant="link"> <i class='fas fa-star'></i> Write a review</Button> {' '}
                 <Button href = '/userProfile' style = {{backgroundColor: "transparent", fontSize: "20px", border: '1px solid black', color: 'black'}} variant="link"><i class='fas fa-camera'></i> Add a photo</Button> {' '}
-                <Button href = '/userProfile' style = {{backgroundColor: "transparent", fontSize: "20px", border: '1px solid black', color: 'black'}} variant="link"><i class="far fa-share-square"></i> Share</Button>
+                <Button href = '/events' style = {{backgroundColor: "transparent", fontSize: "20px", border: '1px solid black', color: 'black'}} variant="link"><i class="fas fa-calendar-week"></i>  Events</Button>
                 </div>
                 <hr />
                 <h3> Covid-19 Updates </h3> {'  '}
@@ -111,6 +111,10 @@ class RestaurantPage extends Component {
                 <a href='/addDish'>
                 <span>
                 <i class="far fa-plus-square"></i></span> Add/Edit dishes</a>
+                <hr />
+                <a href='/viewDish'>
+                <span>
+                <i class="fas fa-utensils"></i></span> Full menu</a>
             </div>
             </div>
         </React.Fragment>

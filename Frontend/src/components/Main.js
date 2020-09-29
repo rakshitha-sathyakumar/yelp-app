@@ -9,7 +9,7 @@ import userProfile from './user/profile';
 import BasicDetails from './user/profileUpdate';
 import RestaurantPage from './restaurant/restaurantLanding';
 import updateRest from './restaurant/updateRestaurant';
-import updateDishes from './restaurant/dishes';
+import updateDishes from './restaurant/addDishes';
 import HomePage from './home';
 
 
@@ -27,7 +27,7 @@ class Main extends Component {
                 <Route exact path="/update" component={BasicDetails}/>
                 <Route exact path="/restaurant" component={RestaurantPage}/>
                 <Route exact path="/updateRestaurant" component={updateRest}/>
-                <Route exact path="/updateDish" component={updateDishes}/>
+                <Route exact path="/addDish" component={updateDishes}/>
             </div>
         )
     }

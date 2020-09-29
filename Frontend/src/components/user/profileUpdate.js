@@ -46,21 +46,21 @@ handleUpdate = (e) => {
         }
 
   this.props.updateUser(data);
-  console.log(this.props.type)
+  console.log(this.props)
 };
     render() {
       let redirectVar = null;
-      if(this.props.user && this.props.user.user_id){
-        localStorage.setItem("email_id", this.props.user.email);
-        localStorage.setItem("first_name", this.props.user.first_name);
-        localStorage.setItem("user_id", this.props.user.user_id);
-        localStorage.setItem("last_name", this.props.user.last_name);
-        redirectVar = <Redirect to="/userProfile"/>
-      }
+      // if(this.props.user ===  "USER_UPDATED"){
+      //   localStorage.setItem("email_id", this.props.user.email);
+      // //   localStorage.setItem("first_name", this.props.user.first_name);
+      // //   localStorage.setItem("user_id", this.props.user.user_id);
+      // //   localStorage.setItem("last_name", this.props.user.last_name);
+      // //   redirectVar = <Redirect to="/userProfile"/>
+      // }
 
       return (
         <div>
-          {redirectVar}
+          {/* {redirectVar} */}
         <React.Fragment>
           <Navigationbar />
         <div class="row">

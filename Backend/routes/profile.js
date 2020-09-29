@@ -27,7 +27,6 @@ router.get('/:user_id', (req, res) => {
 
 router.post('/update/:user_id', (req, res) => {
     let sql = `CALL update_user('${req.params.user_id}', '${req.body.email}', '${req.body.first_name}', '${req.body.last_name}', '${req.body.gender}', '${req.body.address}', '${req.body.contactNo}', '${req.body.dateofbirth}',  '${req.body.nickname}', '${req.body.thingsilove}', '${req.body.notyelping}', '${req.body.headline}', '${req.body.website}', '${req.body.yelpingsince}');`;
-    console.log("hello");
     pool.query(sql, (err, result) => {
       if (err) {
         console.log(err);

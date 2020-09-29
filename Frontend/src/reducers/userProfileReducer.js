@@ -4,8 +4,7 @@ import { GET_USER, UPDATE_USER } from '../actions/types';
      user: {}
  };
 
- export default function(state = initialState, action){
-    console.log(action)
+ export default function(state = initialState, action) {
     switch(action.type){
         case GET_USER:
             return {

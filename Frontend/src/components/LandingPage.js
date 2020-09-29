@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import backGroundImage from "./images/landingPageImage.jpg"
 import CustomerCarousel from "./images/yelp_logo.jpg"
-import { Form, FormControl, Button, Image } from 'react-bootstrap';
+import { Form, Button, Image } from 'react-bootstrap';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -20,8 +20,8 @@ class LandingPage extends Component {
         return (
             <div style={backgroundImagePic}>
                 <div>
-                    <Button href = '/userProfile' style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
-                    <Button href='/restaurant' style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
+                    <Button style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
+                    <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Talk </Button>
                     <a href ='/login' class="btn bg-transparent float-right" style={{marginTop: "25px", marginRight: "45px", border: "1px solid black"}} role="button"> Login </a>
                     <a href ='/customerSignup' class="btn bg-transparent float-right" style={{marginTop:"25px", marginRight: "10px", border: "1px solid black"}}role="button"> Sign Up </a>

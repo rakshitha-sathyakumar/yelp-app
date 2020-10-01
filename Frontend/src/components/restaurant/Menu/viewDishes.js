@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Navigationbar from '../navigation';
+import Navigationbar from '../../navigation';
 // import userProfile from './profile';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import appetizerImage from '../images/appetizer.jpg';
-import saladImage from '../images/salad.jpg';
-import maincourseImage from '../images/mainCourse.jpg';
-import dessertImage from '../images/desserts.jpg';
-import beveragesImage from '../images/beverages.jpg';
+import appetizerImage from '../../images/appetizer.jpg';
+import saladImage from '../../images/salad.jpg';
+import maincourseImage from '../../images/mainCourse.jpg';
+import dessertImage from '../../images/desserts.jpg';
+import beveragesImage from '../../images/beverages.jpg';
 import PropTypes from 'prop-types';
-import profilepic from './../images/download.png'
+//import profilepic from './../images/download.png'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';
@@ -39,7 +39,7 @@ class viewDish extends Component {
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                            <a href ="/dishList/#appetizer">Full menu</a>
+                            <a href ="/appetizer" >Full menu</a>
                             </Card.Footer>
                         </Card>
                         <Card>

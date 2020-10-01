@@ -9,13 +9,13 @@ import userProfile from './user/profile';
 import BasicDetails from './user/profileUpdate';
 import RestaurantPage from './restaurant/restaurantLanding';
 import updateRest from './restaurant/updateRestaurant';
-import updateDishes from './restaurant/addDishes';
-import viewDish from './restaurant/viewDishes';
-import dishList from './restaurant/viewDishList';
+import updateDishes from './restaurant/Menu/addDishes';
+import viewDish from './restaurant/Menu/viewDishes';
+import dishList from './restaurant/Menu/viewDishList';
 import viewEvents from './restaurant/events';
 import addEvent from './restaurant/addEvents';
 import HomePage from './home';
-
+import Appetizer from './restaurant/Menu/getAppetizer';
 
 class Main extends Component {
     render() {
@@ -36,6 +36,7 @@ class Main extends Component {
                 <Route exact path="/dishList" component={dishList}/>
                 <Route exact path="/events" component={viewEvents}/>
                 <Route exact path="/addEvent" component={addEvent}/>
+                <Route exact path="/appetizer" component={Appetizer}/>
             </div>
         )
     }

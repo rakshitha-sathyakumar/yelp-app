@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Navigationbar from '../navigation';
+import Navigationbar from '../../navigation';
 // import userProfile from './profile';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import backgroundImage from '../images/menuCard.jpg';
+// import backgroundImage from '../images/menuCard.jpg';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';

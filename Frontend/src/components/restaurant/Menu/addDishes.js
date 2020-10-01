@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Navigationbar from '../navigation';
+import Navigationbar from '../../navigation';
 // import userProfile from './profile';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import PropTypes from 'prop-types';
-import profilepic from './../images/download.png'
+//import profilepic from '../../images/download.png'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button} from 'react-bootstrap';

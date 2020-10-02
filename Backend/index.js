@@ -7,6 +7,8 @@ const userProfile = require("./routes/profile");
 const restProfile = require("./routes/restaurant");
 const addDish = require("./routes/addDish");
 const addEvent = require("./routes/addEvents");
+const viewMenu = require("./routes/menu");
+const viewEvent = require("./routes/getEvents");
 
 app.use("/yelp/login", login);
 app.use("/yelp/customerSignUp", custSignup);
@@ -15,6 +17,8 @@ app.use("/yelp/userProfile", userProfile);
 app.use("/yelp/restProfile", restProfile);
 app.use("/yelp/addDish", addDish);
 app.use("/yelp/addEvent", addEvent);
+app.use("/yelp/viewMenu", viewMenu);
+app.use("/yelp/viewEvents", viewEvent);
 
 const port = process.env.PORT || 3001;
 var server = app.listen(port, () => {

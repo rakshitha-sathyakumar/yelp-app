@@ -18,10 +18,41 @@ import axios from 'axios';
 class viewEvents extends Component {
     constructor(props) {
         super(props);
-        this.state ={};
+        this.state ={
+            eventList: []
+        };
     }
 
+componentDidMount () {
+    axios.get(`http://localhost:3001/yelp/viewEvents/${localStorage.getItem("rest_id")}`)
+    .then(res => {
+        //console.log(res.data)
+        this.setState({ eventList: res.data });
+        //console.log(this.state.appetizerList);
+    });
+}
+
     render() {
+        console.log(this.state.eventList);
+        let renderEvents = this.state.eventList.map(event => {
+            return (
+                <div>
+                    <Card style={{margin: "10px", border:"1px solid black"}}>
+                        <Card.Img variant="top" src={illusionsImage} />
+                        <Card.Body>
+                        <Card.Title>{event.event_name}</Card.Title>
+                        <Card.Text> <i class="fas fa-hourglass-half"></i> {event.date} {event.time}</Card.Text>
+                        <Card.Text> <i class="fas fa-map-marker-alt"></i> {event.event_location} </Card.Text>
+                        <Card.Text>{event.event_description}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <a href ="/dishList/#appetizer">Registered people</a>
+                        </Card.Footer>
+                    </Card>
+                    <br/>
+                </div>
+            )
+        })
         return (
             <React.Fragment>
             <Navigationbar />
@@ -30,38 +61,11 @@ class viewEvents extends Component {
             <Button href="/addEvent" style={{marginTop:"15px", float:"right", backgroundColor:"red"}}> Create an event </Button><br/><br/>
             <hr />
             <h2 style={{textAlign:"center"}}>List of events</h2>
-            <div class='container'>
-                <CardGroup>
-                    <Card style={{margin: "10px", border:"1px solid black"}}>
-                        <Card.Img variant="top" src={illusionsImage} />
-                        <Card.Body>
-                        <Card.Title>Illusions - An Outdoor Exhibition</Card.Title>
-                        <Card.Text> <i class="fas fa-hourglass-half"></i> Wednesday, Sep 2, 10:00 am </Card.Text>
-                        <Card.Text> <i class="fas fa-map-marker-alt"></i> CuriOdyssey </Card.Text>
-                        <Card.Text>
-                        Explore the wonder of visual perception with CuriOdyssey's outdoor exhibition, Illusions. 
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <a href ="/dishList/#appetizer">Registered people</a>
-                        </Card.Footer>
-                    </Card>
-                    <Card style={{margin: "10px", border:"1px solid black"}}>
-                        <Card.Img variant="top" src={cprImage} />
-                        <Card.Body>
-                        <Card.Title>CPR Certification in Dublin</Card.Title>
-                        <Card.Text> <i class="fas fa-hourglass-half"></i> Sunday, Oct 4, 1:00 pm</Card.Text>
-                        <Card.Text> <i class="fas fa-map-marker-alt"></i> Dublin CPR Classes </Card.Text>
-                        <Card.Text>
-                        The American Heart Association CPR class is 3 hours long. You will learn how to perform CPR on an adult, child and infant, choke-saving and how to use the AED. 
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <a href ="/dishList/#appetizer">Registered people</a>
-                        </Card.Footer>
-                    </Card>
-                </CardGroup>
-            </div>
+                <div class='col-md-6'>
+                    <CardGroup>
+                            {renderEvents}
+                    </CardGroup>
+                </div>
             </div>
             </React.Fragment>
         )}

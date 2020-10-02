@@ -7,8 +7,9 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';
 import axios from 'axios';
+// import { getMainCourse } from './getMaincourse';
 
-class Appetizer extends Component {
+export class getAppetizer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,32 +20,38 @@ class Appetizer extends Component {
     componentDidMount() {
         axios.get(`http://localhost:3001/yelp/viewMenu/appetizer/${localStorage.getItem("rest_id")}`)
         .then(res => {
-            this.setState({ appetizerList: res.data });  
-            console.log(this.state.appetizerList); 
-        })
+            //console.log(res.data)
+            this.setState({ appetizerList: res.data });
+            //console.log(this.state.appetizerList);
+        });
     }
 
-      render () {
-          let renderMenu = []
-
-          if (this.state && this.state.appetizerList && this.state.appetizerList.length>0) {
-              for (var i=0; i<this.state.appetizerList.length; i++) {
-                  renderMenu.push(
-                      <Card>
-                          <Card.title>
-                              {this.state.appetizerList[i].dish_name}
-                          </Card.title>
-                      </Card>
-                  );
-                }
-            }
-            return(
+    render () {
+        console.log(this.state.appetizerList);
+        let renderAppetizer = this.state.appetizerList.map(menu => {
+            return (
                 <div>
-                    {renderMenu}
+                    <Card>
+                        <Card.Title>{menu.dish_name} </Card.Title>
+                        <Card.Text>{menu.ingredients}</Card.Text>
+                        <Card.Text>{menu.description}</Card.Text>
+                        <Card.Text> ${menu.price}</Card.Text>
+                    </Card>
+                    <br/>
+                    <br/>
                 </div>
             )
-
-        }
-         
+        })
+        return (
+            <div>
+            <div class='navbar'>
+            </div>
+            <div class='container'> 
+                {renderAppetizer}
+            </div>
+            </div>
+        )
     }
-export default Appetizer;
+         
+}
+export default getAppetizer;

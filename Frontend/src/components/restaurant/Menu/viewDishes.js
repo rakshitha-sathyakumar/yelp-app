@@ -39,7 +39,7 @@ class viewDish extends Component {
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                            <a href ="/appetizer" >Full menu</a>
+                            <a href ="/menu/appetizer" >Full menu</a>
                             </Card.Footer>
                         </Card>
                         <Card>
@@ -51,7 +51,7 @@ class viewDish extends Component {
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                            <a href ="/dishList/#salad">Full menu</a>
+                            <a href ="/menu/salad">Full menu</a>
                             </Card.Footer>
                         </Card>
                         </CardGroup>
@@ -65,7 +65,7 @@ class viewDish extends Component {
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                            <a href ="/dishList/#mainCourse" >Full menu</a>
+                            <a href ="/menu/maincourse" >Full menu</a>
                             </Card.Footer>
                         </Card>
                         <Card>
@@ -77,7 +77,7 @@ class viewDish extends Component {
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                            <a href ="/dishList/#desserts">Full menu</a>
+                            <a href ="/menu/dessert">Full menu</a>
                             </Card.Footer>
                         </Card>
                         </CardGroup>
@@ -90,7 +90,7 @@ class viewDish extends Component {
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                            <a href ="/dishList/#beverages">Full menu</a>
+                            <a href ="/menu/beverage">Full menu</a>
                             </Card.Footer>
                         </Card>
                     </div>

@@ -9,23 +9,11 @@ router.post('/', (req, res) => {
     pool.query(sql, (err, result) => {
         console.log(err);
       if (err) {
-        // res.writeHead(500, {
-        //   'Content-Type': 'text/plain'
-        // });
         res.end("Error in Data");
       }
       if (result && result.length > 0 && result[0][0].status === 'EVENT_ADDED') {
-        // res.writeHead(200, {
-        //   'Content-Type': 'text/plain'
-        // })
         res.end(result[0][0].status);
       }
-    //   else if (result && result.length > 0 && result[0][0].status === 'RESTAURANT_EXISTS') {
-    //     // res.writeHead(401, {
-    //     //   'Content-Type': 'text/plain'
-    //     // })
-    //     res.end(result[0][0].status);
-    //   }
     });
   });
 

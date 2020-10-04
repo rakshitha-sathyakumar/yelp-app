@@ -12,7 +12,7 @@ import updateRest from './restaurant/updateRestaurant';
 import updateDishes from './restaurant/Menu/addDishes';
 import viewDish from './restaurant/Menu/viewDishes';
 import dishList from './restaurant/Menu/viewDishList';
-import viewEvents from './restaurant/events';
+import viewEvents from './restaurant/eventList';
 import addEvent from './restaurant/addEvents';
 import HomePage from './home';
 import getAppetizer from './restaurant/Menu/getAppetizer';
@@ -20,6 +20,11 @@ import getMaincourse from './restaurant/Menu/getMaincourse';
 import getSalad from './restaurant/Menu/getSalad';
 import getDessert from './restaurant/Menu/getDessert';
 import getBeverage from './restaurant/Menu/getBeverage';
+import viewRest from './restaurant/restaurantList';
+import userRestpage from './user/userRestaurant';
+import addReview from './user/writeReview';
+import getRegUserList from './restaurant/userRegList';
+import restUserProfile from './restaurant/restUserProfile';
 
 class Main extends Component {
     render() {
@@ -45,6 +50,12 @@ class Main extends Component {
                 <Route exact path='/menu/salad' component={getSalad}/>
                 <Route exact path='/menu/dessert' component={getDessert}/>
                 <Route exact path='/menu/beverage' component={getBeverage}/>
+                <Route exact path='/list' component={viewRest}/>
+                <Route exact path='/restaurant_profile' component={userRestpage}/>
+                <Route exact path='/addReview' component={addReview}/>
+                <Route exact path='/regUser/:event_id'  component={getRegUserList}/>
+                <Route exact path='/userProfile/:user_id' component={restUserProfile}/>
+
             </div>
         )
     }

@@ -7,7 +7,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';
 import axios from 'axios';
-// import { getMainCourse } from './getMaincourse';
+import backendServer from "../../../backendServer";
 
 export class getAppetizer extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ export class getAppetizer extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:3001/yelp/viewMenu/appetizer/${localStorage.getItem("rest_id")}`)
+        axios.get(`${backendServer}/yelp/viewMenu/appetizer/${localStorage.getItem("rest_id")}`)
         .then(res => {
             //console.log(res.data)
             this.setState({ appetizerList: res.data });
@@ -32,24 +32,30 @@ export class getAppetizer extends Component {
             return (
                 <div>
                     <Card>
-                        <Card.Title>{menu.dish_name} </Card.Title>
-                        <Card.Text>{menu.ingredients}</Card.Text>
-                        <Card.Text>{menu.description}</Card.Text>
-                        <Card.Text> ${menu.price}</Card.Text>
+                        <Card.Title style={{margin: "10px"}}>{menu.dish_name} </Card.Title>
+                        <Card.Text style={{margin: "10px"}}>{menu.ingredients}</Card.Text>
+                        <Card.Text style={{margin: "10px"}}>{menu.description}</Card.Text>
+                        <Card.Text style={{margin: "10px"}}> ${menu.price}</Card.Text>
+                        <Button>
+                        <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link></Button>
                     </Card>
                     <br/>
                     <br/>
-                </div>
+                </div> 
             )
         })
         return (
-            <div>
-            <div class='navbar'>
-            </div>
-            <div class='container'> 
-                {renderAppetizer}
-            </div>
-            </div>
+            <React.Fragment>
+                <Navigationbar/>
+                <div class="container">
+                    <center>
+                    <h1 style={{margin: "10px"}}> List of Appetizers </h1>
+                    </center>
+                        {renderAppetizer}
+        
+                </div>
+            </React.Fragment>
+            
         )
     }
          

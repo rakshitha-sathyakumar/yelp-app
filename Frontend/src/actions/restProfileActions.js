@@ -1,8 +1,9 @@
 import { GET_RESTAURANT, UPDATE_RESTAURANT } from "./types";
 import axios from "axios";
+import backendServer from "../backendServer";
 
 export const getRest = () => dispatch => {
-    axios.get(`http://localhost:3001/yelp/restProfile/${localStorage.getItem("rest_id")}`)
+    axios.get(`${backendServer}/yelp/restProfile/${localStorage.getItem("rest_id")}`)
         .then(response => dispatch({
             type: GET_RESTAURANT,
             payload: response.data
@@ -14,7 +15,7 @@ export const getRest = () => dispatch => {
 
 export const updateRest = (restProfileData) => dispatch => {
     axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:3001/yelp/restProfile/update/${localStorage.getItem("rest_id")}`, restProfileData)
+    axios.post(`${backendServer}/yelp/restProfile/update/${localStorage.getItem("rest_id")}`, restProfileData)
         .then(response => dispatch({
             type: UPDATE_RESTAURANT,
             payload: response.data

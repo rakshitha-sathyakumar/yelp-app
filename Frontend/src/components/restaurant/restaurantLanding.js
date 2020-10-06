@@ -13,18 +13,36 @@ import rest2 from './../images/rest2.jpg'
 import food1 from './../images/food1.jpg'
 import food2 from './../images/food2.jpg'
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 
 class RestaurantPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            reviewList: []
+        };
         this.onChange = this.onChange.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
     }
 
+    createElements(n) {
+        var elements = [];
+        for (let i = 0; i < n; i++) {
+          elements.push(
+            <i className='fa fa-star' aria-hidden='true' style={{ color: 'red' }}></i>,
+          );
+        }
+        return elements;
+      }
+
     componentWillMount() {
         this.props.getRest();
+        axios.get(`${backendServer}/yelp/addReview/${localStorage.getItem("rest_id")}`)
+        .then(res =>{
+        console.log(res);
+        this.setState({reviewList: res.data});
+    })
         // console.log(this.props)
     }
 
@@ -42,6 +60,18 @@ class RestaurantPage extends Component {
         this.props.updateRest(data);
     };
     render() {
+        let renderReview = this.state.reviewList.map(review => {
+            return (
+                <div class='col-md-10'>
+                        <h3 style={{margin: "5px"}}>{review.first_name} {review.last_name} </h3>
+                        <h6 style={{margin: "5px"}}> {this.createElements(review.rating)}   {review.date}</h6>
+                        <p style={{margin: "5px"}}>"{review.reviews}"</p>
+
+                    <br/>
+                    <hr />
+                </div>
+            )
+        })
       return (
         <React.Fragment>
           <Navigationbar />
@@ -73,7 +103,7 @@ class RestaurantPage extends Component {
                 <i class='fas fa-star-half' style={{color: "red"}}></i>
                 <div style={{overflow: "hidden"}}>
                     <p style={{float: "left", color: "green"}}>Open</p>
-                    <p style={{float: "left", marginLeft: "10px"}}>6:00 AM - 4:00 PM</p>
+                    <p style={{float: "left", marginLeft: "10px"}}>{this.props.user.timings}</p>
                 </div>
                 <div class="inline-block">
                 <Button href = '/userProfile' style = {{backgroundColor: "red", fontSize: "20px", border: '1px solid red', color: "white"}} variant="link"> <i class='fas fa-star'></i> Write a review</Button> {' '}
@@ -91,10 +121,8 @@ class RestaurantPage extends Component {
                 <br/>
                 <hr />
                 <h4> Review Hightlights</h4>
-                <br />
-                <p>"My all time favorite might have might have to be a jalapeño bagel or a pesto bagel with veggie cream cheese!"</p>
-                <p>"This location is conveniently located next to SJSU and will definitely eat stopping by here in between classes."</p>
-                {/* <p> Italian restaurant that is commited to good food and services. Checkout our webpage for more information about the dishes.</p> */}
+                <hr />
+                {renderReview}
             </div>
             <div class="col-xs-8" class="float-right" style={{marginLeft:"300px", marginTop: "20px"}}>
                 <p>

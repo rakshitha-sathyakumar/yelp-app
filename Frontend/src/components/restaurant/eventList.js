@@ -6,6 +6,7 @@ import illusionsImage from '../images/illusions.jpg';
 import {Button, Card, CardGroup} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 class viewEvents extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class viewEvents extends Component {
     }
 
 componentDidMount () {
-    axios.get(`http://localhost:3001/yelp/viewEvents/${localStorage.getItem("rest_id")}`)
+    axios.get(`${backendServer}/yelp/viewEvents/${localStorage.getItem("rest_id")}`)
     .then(res => {
         //console.log(res.data)
         this.setState({ eventList: res.data });

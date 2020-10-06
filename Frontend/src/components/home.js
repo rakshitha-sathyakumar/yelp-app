@@ -22,7 +22,7 @@ class HomePage extends Component {
             <div style={backgroundImagePic}>
                 <div>
                     <Button href = '/userProfile' style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
-                    <Button href='/restaurant' style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
+                    <Button href='/allEvents' style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
                     <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Talk </Button>
                     <Button href = '/list' style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> <i class="fas fa-utensils"></i> Restaurant </Button>
                     {/* <Button  style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}}> <i class='far fa-user-circle'></i> Profile </Button> */}

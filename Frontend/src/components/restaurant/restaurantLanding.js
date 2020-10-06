@@ -13,6 +13,7 @@ import rest2 from './../images/rest2.jpg'
 import food1 from './../images/food1.jpg'
 import food2 from './../images/food2.jpg'
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 
 class RestaurantPage extends Component {
@@ -37,7 +38,7 @@ class RestaurantPage extends Component {
 
     componentWillMount() {
         this.props.getRest();
-        axios.get(`http://localhost:3001/yelp/addReview/${localStorage.getItem("rest_id")}`)
+        axios.get(`${backendServer}/yelp/addReview/${localStorage.getItem("rest_id")}`)
         .then(res =>{
         console.log(res);
         this.setState({reviewList: res.data});

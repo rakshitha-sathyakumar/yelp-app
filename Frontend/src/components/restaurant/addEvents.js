@@ -8,6 +8,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button} from 'react-bootstrap';
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 class addEvents extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ onSubmit = (e) => {
     location: this.state.location,
     hashtag: this.state.hashtag
   }
-  return axios.post('http://localhost:3001/yelp/addEvent',data)
+  return axios.post(`${backendServer}/yelp/addEvent`,data)
   .then((response) => {
     if (response.status === 'DISH_ADDED') {
       alert("Event added")

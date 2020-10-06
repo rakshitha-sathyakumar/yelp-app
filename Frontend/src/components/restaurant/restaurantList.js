@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import illusionsImage from '../images/restList.jpg';
 import {Button, Card, CardGroup} from 'react-bootstrap';
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 class viewRest extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class viewRest extends Component {
     }
 
 componentDidMount () {
-    axios.get(`http://localhost:3001/yelp/restProfile`)
+    axios.get(`${backendServer}/yelp/restProfile`)
     .then(res => {
         //console.log(res.data)
         this.setState({ restList: res.data });

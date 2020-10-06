@@ -8,6 +8,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button} from 'react-bootstrap';
 import axios from 'axios';
+import backendServer from "../../../backendServer";
 
 class updateDishes extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ onSubmit = (e) => {
     description: this.state.description,
     category: this.state.category
   }
-  return axios.post('http://localhost:3001/yelp/addDish',data)
+  return axios.post(`${backendServer}/yelp/addDish`,data)
   .then((response) => {
     if (response.status === 'DISH_ADDED') {
       alert("Dish added")

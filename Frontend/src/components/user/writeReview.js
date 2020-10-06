@@ -7,6 +7,7 @@ import rest2 from './../images/rest2.jpg'
 import food1 from './../images/food1.jpg'
 import food2 from './../images/food2.jpg'
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 class addReview extends Component {
 constructor(props) {
@@ -46,7 +47,7 @@ onSubmit = (e) => {
     date: current_date,
     rating: this.state.rating
   }
-  return axios.post('http://localhost:3001/yelp/addReview',data)
+  return axios.post(`${backendServer}/yelp/addReview`,data)
   .then((response) => {
       console.log(response.status)
     if (response.status === 200) {

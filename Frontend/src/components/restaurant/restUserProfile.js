@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { Jumbotron, CardImg} from 'react-bootstrap';
 import YelpImage from './../images/yelp_logo.jpg'
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 class restUserProfile extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class restUserProfile extends Component {
     }
 
     componentWillMount() {
-        axios.get(`http://localhost:3001/yelp/userProfile/${this.props.match.params.user_id}`)
+        axios.get(`${backendServer}/yelp/userProfile/${this.props.match.params.user_id}`)
         .then(res => {
             console.log(res);
             this.setState({ restUserProfile: res.data });

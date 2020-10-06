@@ -7,7 +7,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';
 import axios from 'axios';
-// import { getMainCourse } from './getMaincourse';
+import backendServer from "../../backendServer";
 
 export class getRegUserList extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export class getRegUserList extends Component {
 
     componentDidMount() {
         console.log()
-        axios.get(`http://localhost:3001/yelp/regUser/${this.props.match.params.event_id}`)
+        axios.get(`${backendServer}/yelp/regUser/${this.props.match.params.event_id}`)
         .then(res => {
             //console.log(res.data)
             this.setState({ regUserList: res.data });

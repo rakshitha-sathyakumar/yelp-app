@@ -25,6 +25,9 @@ import userRestpage from './user/userRestaurant';
 import addReview from './user/writeReview';
 import getRegUserList from './restaurant/userRegList';
 import restUserProfile from './restaurant/restUserProfile';
+import editDish from './restaurant/Menu/editDish';
+import allEvents from './user/allEvents';
+import eventDetails from './user/eventDetails';
 
 class Main extends Component {
     render() {
@@ -55,6 +58,10 @@ class Main extends Component {
                 <Route exact path='/addReview' component={addReview}/>
                 <Route exact path='/regUser/:event_id'  component={getRegUserList}/>
                 <Route exact path='/userProfile/:user_id' component={restUserProfile}/>
+                <Route exact path='/editDish/:rest_id/:dish_id' component={editDish}/>
+                <Route exact path='/allEvents' component={allEvents}/>
+                <Route exact path='/event/:event_id' component={eventDetails}/>
+
 
             </div>
         )

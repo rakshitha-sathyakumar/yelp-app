@@ -1,9 +1,10 @@
 import { USER_SIGNUP, RESTAURANT_SIGNUP } from "./types";
 import axios from "axios";
+import backendServer from "../backendServer";
 
 export const customerSignup = (userData) => dispatch => {
     axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:3001/yelp/customerSignUp`, userData)
+    axios.post(`${backendServer}/yelp/customerSignUp`, userData)
         .then(response => dispatch({
             type: USER_SIGNUP,
             payload: response.data
@@ -21,7 +22,7 @@ export const customerSignup = (userData) => dispatch => {
 
 export const restaurantSignup = (restaurantData) => dispatch => {
     axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:3001/yelp/restSignUp`, restaurantData)
+    axios.post(`${backendServer}/yelp/restSignUp`, restaurantData)
         .then(response => dispatch({
             type: RESTAURANT_SIGNUP,
             payload: response.data

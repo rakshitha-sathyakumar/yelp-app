@@ -7,6 +7,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';
 import axios from 'axios';
+import backendServer from "../../../backendServer";
 
 export class getMaincourse extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export class getMaincourse extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:3001/yelp/viewMenu/maincourse/${localStorage.getItem("rest_id")}`)
+        axios.get(`${backendServer}/yelp/viewMenu/maincourse/${localStorage.getItem("rest_id")}`)
         .then(res => {
             //console.log(res.data)
             this.setState({ maincourseList: res.data });
@@ -35,6 +36,7 @@ export class getMaincourse extends Component {
                         <Card.Text>{menu.ingredients}</Card.Text>
                         <Card.Text>{menu.description}</Card.Text>
                         <Card.Text> ${menu.price}</Card.Text>
+                        <Button> <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link></Button>
                     </Card>
                     <br/>
                     <br/>

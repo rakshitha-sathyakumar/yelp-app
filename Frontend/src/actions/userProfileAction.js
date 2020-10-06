@@ -1,8 +1,9 @@
 import { GET_USER, UPDATE_USER } from "./types";
 import axios from "axios";
+import backendServer from "../backendServer";
 
 export const getUser = () => dispatch => {
-    axios.get(`http://localhost:3001/yelp/userProfile/${localStorage.getItem("user_id")}`)
+    axios.get(`${backendServer}/yelp/userProfile/${localStorage.getItem("user_id")}`)
         .then(response => dispatch({
             type: GET_USER,
             payload: response.data
@@ -14,7 +15,7 @@ export const getUser = () => dispatch => {
 
 export const updateUser = (userProfileData) => dispatch => {
     axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:3001/yelp/userProfile/update/${localStorage.getItem("user_id")}`, userProfileData)
+    axios.post(`${backendServer}/yelp/userProfile/update/${localStorage.getItem("user_id")}`, userProfileData)
         .then(response => dispatch({
             type: UPDATE_USER,
             payload: response.data

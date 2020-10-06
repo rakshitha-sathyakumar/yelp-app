@@ -11,6 +11,7 @@ const viewMenu = require("./routes/menu");
 const viewEvent = require("./routes/getEvents");
 const addReview = require("./routes/review");
 const regUser = require("./routes/regUser");
+const editDish = require("./routes/editDish");
 
 app.use("/yelp/login", login);
 app.use("/yelp/customerSignUp", custSignup);
@@ -23,6 +24,7 @@ app.use("/yelp/viewMenu", viewMenu);
 app.use("/yelp/viewEvents", viewEvent);
 app.use("/yelp/addReview", addReview);
 app.use("/yelp/regUser", regUser);
+app.use("/yelp/editDish", editDish);
 
 const port = process.env.PORT || 3001;
 var server = app.listen(port, () => {

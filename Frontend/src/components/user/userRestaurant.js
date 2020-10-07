@@ -118,9 +118,11 @@ class userRestpage extends Component {
                 <p>
                 <i class='fas fa-envelope'></i> {this.state.restProfile.email}</p>
                 <hr/>
-                <a href='/viewDish'>
+                <a href='/userMenu'>
                 <span>
                 <i class="fas fa-utensils"></i></span> Full menu</a>
+                <hr />
+                <a href='/user/orders'> Your orders </a>
             </div>
             </div>
         </React.Fragment>

@@ -46,13 +46,16 @@ export class getBeverage extends Component {
             )
         })
         return (
-            <div>
-            <div class='navbar'>
-            </div>
-            <div class='container'> 
-                {renderBeverage}
-            </div>
-            </div>
+            <React.Fragment>
+                <Navigationbar/>
+                <div class="container">
+                    <center>
+                    <h1 style={{margin: "10px"}}> List of Beverages </h1>
+                    </center>
+                        {renderBeverage}
+        
+                </div>
+            </React.Fragment>
         )
     }
          

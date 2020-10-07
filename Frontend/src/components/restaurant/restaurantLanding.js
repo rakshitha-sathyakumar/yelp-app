@@ -143,6 +143,10 @@ class RestaurantPage extends Component {
                 <a href='/viewDish'>
                 <span>
                 <i class="fas fa-utensils"></i></span> Full menu</a>
+                <hr />
+                <a href='/restOrders'>
+                 View orders
+                </a>
             </div>
             </div>
         </React.Fragment>

@@ -26,9 +26,10 @@ componentDidMount () {
 
 handleClick = (e) => {
     //prevent page from refresh
-    console.log(e)
+    console.log(e.target)
     e.preventDefault();
     localStorage.setItem("rest_id", e.target.id);
+    localStorage.setItem("rest_name", e.target.name);
     window.location = "/restaurant_profile";
 };
 
@@ -41,7 +42,7 @@ handleClick = (e) => {
                         <Card.Img variant="top" src={illusionsImage} />
                         <Card.Body>
                         <Card.Title >  
-                            <a id = {rest.rest_id} onClick={this.handleClick}>{rest.name} </a>
+                            <a id = {rest.rest_id} name={rest.name} onClick={this.handleClick}>{rest.name} </a>
                         </Card.Title>
                         <Card.Text> <i class="fas fa-location-arrow"></i> {rest.address} {rest.zipcode}</Card.Text>
                         <Card.Text> {rest.Description} </Card.Text>

@@ -20,7 +20,7 @@ export class getSalad extends Component {
     componentDidMount() {
         axios.get(`${backendServer}/yelp/viewMenu/salad/${localStorage.getItem("rest_id")}`)
         .then(res => {
-            //console.log(res.data)
+            console.log(res.data)
             this.setState({ saladList: res.data });
             //console.log(this.state.appetizerList);
         });
@@ -36,8 +36,11 @@ export class getSalad extends Component {
                         <Card.Text>{menu.ingredients}</Card.Text>
                         <Card.Text>{menu.description}</Card.Text>
                         <Card.Text> ${menu.price}</Card.Text>
+                        <div class="display-inline">
                         <Button> <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link>
                         </Button>
+                        <Button>Order now </Button>
+                        </div>
                     </Card>
                     <br/>
                     <br/>
@@ -45,12 +48,15 @@ export class getSalad extends Component {
             )
         })
         return (
-            <div>
-            <h1> List of Salads </h1>
-            <div class='container'> 
-                {renderSalad}
+            <React.Fragment>
+            <Navigationbar/>
+            <div class="container">
+                <center>
+                <h1 style={{margin: "10px"}}> List of Salads </h1>
+                </center>
+                    {renderSalad}
             </div>
-            </div>
+        </React.Fragment>
         )
     }
          

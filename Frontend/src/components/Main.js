@@ -11,7 +11,7 @@ import RestaurantPage from './restaurant/restaurantLanding';
 import updateRest from './restaurant/updateRestaurant';
 import updateDishes from './restaurant/Menu/addDishes';
 import viewDish from './restaurant/Menu/viewDishes';
-import dishList from './restaurant/Menu/viewDishList';
+import dishList from './user/viewDishList';
 import viewEvents from './restaurant/eventList';
 import addEvent from './restaurant/addEvents';
 import HomePage from './home';
@@ -28,7 +28,8 @@ import restUserProfile from './restaurant/restUserProfile';
 import editDish from './restaurant/Menu/editDish';
 import allEvents from './user/allEvents';
 import eventDetails from './user/eventDetails';
-
+import userOrders from './user/userOrders';
+import restOrders from './restaurant/restOrders';
 class Main extends Component {
     render() {
         return (
@@ -45,7 +46,7 @@ class Main extends Component {
                 <Route exact path="/updateRestaurant" component={updateRest}/>
                 <Route exact path="/addDish" component={updateDishes}/>
                 <Route exact path="/viewDish" component={viewDish}/>
-                <Route exact path="/dishList" component={dishList}/>
+                <Route exact path='/userMenu' component={dishList}/>
                 <Route exact path="/events" component={viewEvents}/>
                 <Route exact path="/addEvent" component={addEvent}/>
                 <Route exact path="/menu/appetizer" component={getAppetizer}/>
@@ -61,6 +62,9 @@ class Main extends Component {
                 <Route exact path='/editDish/:rest_id/:dish_id' component={editDish}/>
                 <Route exact path='/allEvents' component={allEvents}/>
                 <Route exact path='/event/:event_id' component={eventDetails}/>
+                <Route exact path='/user/orders' component={userOrders}/>
+                <Route exact path='/restOrders' component={restOrders}/>
+
 
 
             </div>

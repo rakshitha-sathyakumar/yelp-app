@@ -44,13 +44,15 @@ export class getMaincourse extends Component {
             )
         })
         return (
-            <div>
-            <div class='navbar'>
+            <React.Fragment>
+            <Navigationbar/>
+            <div class="container">
+                <center>
+                <h1 style={{margin: "10px"}}> List of Main course </h1>
+                </center>
+                    {renderMaincourse}
             </div>
-            <div class='container'> 
-                {renderMaincourse }
-            </div>
-            </div>
+        </React.Fragment>
         )
     }
          

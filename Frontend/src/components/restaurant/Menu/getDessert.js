@@ -44,13 +44,15 @@ export class getDessert extends Component {
             )
         })
         return (
-            <div>
-            <div class='navbar'>
+            <React.Fragment>
+            <Navigationbar/>
+            <div class="container">
+                <center>
+                <h1 style={{margin: "10px"}}> List of Desserts </h1>
+                </center>
+                    {renderDessert}
             </div>
-            <div class='container'> 
-                {renderDessert}
-            </div>
-            </div>
+        </React.Fragment>
         )
     }
          

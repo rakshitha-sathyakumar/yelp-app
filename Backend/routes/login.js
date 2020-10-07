@@ -7,13 +7,12 @@ var app = express();
 
 router.post('/', (req, res) => {
     let sql = `CALL get_password('${req.body.email}');`;
-
     pool.query(sql, (err, result) => {
         console.log(result);
       if (err) {
-        res.writeHead(500, {
-          'Content-Type': 'text/plain'
-        });
+        // res.writeHead(500, {
+        //   'Content-Type': 'text/plain'
+        // });
         res.send("Database Error");
       }
       if (result && result.length > 0 && result[0][0].status) {

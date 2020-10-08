@@ -79,7 +79,6 @@ router.post('/', (req, res) => {
   });
 
   router.post('/update', (req, res) => {
-    console.log("Hi")
     let sql = `CALL update_orderStatus('${req.body.order_id}', ' ${req.body.order_status}');`;
     console.log(sql);
     pool.query(sql, (err, result) => {

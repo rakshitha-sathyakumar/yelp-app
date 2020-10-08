@@ -13,6 +13,7 @@ const addReview = require("./routes/review");
 const regUser = require("./routes/regUser");
 const editDish = require("./routes/editDish");
 const addOrder = require("./routes/order");
+const searchBar = require("./routes/search");
 
 app.use("/yelp/login", login);
 app.use("/yelp/customerSignUp", custSignup);
@@ -27,6 +28,7 @@ app.use("/yelp/addReview", addReview);
 app.use("/yelp/regUser", regUser);
 app.use("/yelp/editDish", editDish);
 app.use("/yelp/order", addOrder);
+app.use("/restureSearch", searchBar);
 
 const port = process.env.PORT || 3001;
 var server = app.listen(port, () => {

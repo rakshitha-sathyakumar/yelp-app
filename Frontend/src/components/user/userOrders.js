@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Navigationbar from '../navigation';
-// import userProfile from './profile';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-// import backgroundImage from '../images/menuCard.jpg';
-import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button, Card, CardGroup} from 'react-bootstrap';
 import axios from 'axios';
@@ -16,33 +13,44 @@ export class userOrders extends Component {
         this.state = {
             userOrders: [],
             tempUserOrders: []
-
         };
     }
 
     componentDidMount() {
         axios.get(`${backendServer}/yelp/order/${localStorage.getItem("user_id")}`)
         .then(res => {
-            //console.log(res.data)
             this.setState({ userOrders: res.data, tempUserOrders: res.data });
-            //console.log(this.state.appetizerList);
         });
     }
 
     handleCheckboxChange = (e) => {
         e.preventDefault();
-        this.setState({order_status: e.target.id})
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        let order_status = this.state.order_status;
-        let filteredData = this.state.tempUserOrders.filter(order =>
+        let order_status = e.target.id;
+        let filteredData = this.state.userOrders.filter(order =>
             order.order_status == order_status
         );
         console.log(filteredData);
         this.setState({tempUserOrders:filteredData});
-      }
+    }
+
+    handleCancel = (e) => {
+        e.preventDefault();
+       const data = {
+           order_id: e.target.id,
+           order_status: e.target.name
+       }
+       return axios.post(`${backendServer}/yelp/order/update`,data)
+        .then((response) => {
+            console.log(response.status)
+          if (response.status === 200) {
+            alert("Order cancelled")
+           window.location = `/user/orders`
+          }
+        })
+        .catch(function(error) {
+           alert("Error")
+        })
+    }
 
       handleReset = (e) => {
           e.preventDefault();
@@ -62,6 +70,7 @@ export class userOrders extends Component {
                         <Card.Text> <span style={{fontWeight: "bold", marginLeft:"10px"}}> Order date </span> {order.date}</Card.Text>
                         <Card.Text> <span style={{fontWeight: "bold", marginLeft:"10px"}}> Order time </span> {order.time}</Card.Text>
                         <Card.Text> <span style={{fontWeight: "bold", marginLeft:"10px"}}>Order status:</span> {order.order_status} </Card.Text>
+                        <Button style={{backgroundColor: "red", border:"1px solid red", marginLeft:"10px"}} id={order.order_id} name=' Cancelled' onClick={this.handleCancel}> Cancel Order </Button>
                     </Card>
                     <hr />
                     <br/>
@@ -121,7 +130,6 @@ export class userOrders extends Component {
                             onChange={this.handleCheckboxChange}
                             style={{marginLeft:"10px" }}
                         />
-                        <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleSubmit}> Apply filter </Button>
                         <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleReset}> Remove filters </Button>
                         </Form>
                     </div>

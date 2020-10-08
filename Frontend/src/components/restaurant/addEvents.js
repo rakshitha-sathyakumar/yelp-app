@@ -51,8 +51,10 @@ onSubmit = (e) => {
   }
   return axios.post(`${backendServer}/yelp/addEvent`,data)
   .then((response) => {
-    if (response.status === 'DISH_ADDED') {
+    console.log(response.status)
+    if (response.status === 200) {
       alert("Event added")
+      window.location = "/events"
     }
   })
   .catch(function(error) {
@@ -102,9 +104,9 @@ onSubmit = (e) => {
                     <strong>Date</strong>
                   </Form.Label>
                   <Form.Text style={{margin: "0px", padding: "0px"}} className='text-muted'>
-                    This field is required.
+                    This field is required. Follow the format mentioned.
                   </Form.Text>
-                  <Form.Control onChange={this.onChange} name="date" type='text' />
+                  <Form.Control onChange={this.onChange} name="date" type='text' placeholder="mm-dd-yyyy" />
                 </Form.Group>
                 <Form.Group controlId='email'>
                   <Form.Label style={{margin: "0px", padding: "0px"}}>
@@ -124,7 +126,7 @@ onSubmit = (e) => {
                   </Form.Text>
                   <Form.Control onChange={this.onChange} name="hashtag" type='text' />
                 </Form.Group>
-                <Button variant='danger' type='submit'>
+                <Button variant='danger' type='submit' onClick>
                   Save Changes
                 </Button>
                 <a href='/restaurant' style={{ marginLeft: '15px' }}>

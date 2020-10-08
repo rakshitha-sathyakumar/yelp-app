@@ -17,10 +17,6 @@ export class restOrders extends Component {
             restOrders: [],
             tempRestOrder: []
         };
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-        this.handleFilter = this.handleFilter.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleReset = this.handleReset.bind(this);
     }
 
 
@@ -46,9 +42,15 @@ export class restOrders extends Component {
 
 
     handleFilter = (e) => {
-        console.log(e.target.id);
+        //console.log(e.target.id);
         e.preventDefault();
-        this.setState({orders: e.target.id})
+        //this.setState({orders: e.target.id})
+        let orders = e.target.id;
+        let filteredData = this.state.restOrders.filter(order =>
+            order.orders == orders
+        );
+        console.log(filteredData);
+        this.setState({tempRestOrder:filteredData});
     }
 
 
@@ -70,19 +72,6 @@ export class restOrders extends Component {
         .catch(function(error) {
            alert("Error")
         })
-      }
-
-
-      handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state.orders)
-        console.log(this.state.restOrders)
-        let orders = this.state.orders;
-        let filteredData = this.state.restOrders.filter(order =>
-            order.orders == orders
-        );
-        console.log(filteredData);
-        this.setState({tempRestOrder:filteredData});
       }
 
       handleReset = (e) => {
@@ -182,7 +171,6 @@ export class restOrders extends Component {
                             onChange={this.handleFilter}
                             style={{marginLeft:"10px" }}
                         />
-                        <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleSubmit}> Apply filter </Button>
                         <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleReset}> Remove filter </Button>
                         </Form>
                     </div>

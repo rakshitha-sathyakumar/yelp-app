@@ -2,26 +2,60 @@ import React, { Component } from 'react';
 import Navigationbar from '../navigation';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import illusionsImage from '../images/restList.jpg';
-import {Button, Card, CardGroup} from 'react-bootstrap';
+import {Button, Card, CardGroup, Form} from 'react-bootstrap';
 import axios from 'axios';
 import backendServer from "../../backendServer";
+
 
 class viewRest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            restList: []
+            restList: [],
+            tempRestList: [],
+            searchKeyword: "",
+            searchCategory: 0
         };
-        this.handleClickk = this.handleClick.bind(this);
     }
 
 componentDidMount () {
     axios.get(`${backendServer}/yelp/restProfile`)
     .then(res => {
-        //console.log(res.data)
-        this.setState({ restList: res.data });
-        //console.log(this.state.restList);
+        this.setState({ restList: res.data, tempRestList: res.data});
     });
+    // if(this.props.location.state.searchKeyword === '') {
+    //     console.log('hello');
+    //     this.setState(
+    //       {
+    //         searchCategory: this.props.location.state.searchCategory,
+    //         searchKeyword: this.props.location.state.searchKeyword,
+    //       },
+    //       () => {
+    //         axios.get(`${backendServer}/restureSearch/${this.state.searchCategory}/${this.state.searchKeyword}`)
+    //           .then((response) =>
+    //             this.setState({
+    //               data: response.data,
+    //             }),
+    //           )
+    //           .catch((error) => {
+    //             console.log(error);
+    //           });
+    //       },
+    //     );
+    //   }
+}
+
+
+handleCheckboxChange = (e) => {
+    e.preventDefault();
+    //this.setState({delivery_method: e.target.id})
+    let delivery_method = e.target.id;
+    console.log(delivery_method)
+    let filteredData = this.state.restList.filter(order =>
+    order.delivery_method == delivery_method
+    );
+    console.log(filteredData);
+    this.setState({tempRestList:filteredData});
 }
 
 handleClick = (e) => {
@@ -33,18 +67,24 @@ handleClick = (e) => {
     window.location = "/restaurant_profile";
 };
 
+  handleReset = (e) => {
+      e.preventDefault();
+      let allOrders = this.state.restList;
+      this.setState({tempRestList: allOrders})
+  }
+
     render() {
         //console.log(this.state.restList.name);
-        let renderRest = this.state.restList.map(rest => {
+        let renderRest = this.state.tempRestList.map(rest => {
             return (
                 <div class='col-md-6'>
                     <Card style={{margin: "10px", border:"1px solid black"}}>
-                        <Card.Img variant="top" src={illusionsImage} />
+                        <Card.Img variant="top" src={illusionsImage} onClick={this.handleClick} />
                         <Card.Body>
-                        <Card.Title >  
+                        <Card.Title variant="link">  
                             <a id = {rest.rest_id} name={rest.name} onClick={this.handleClick}>{rest.name} </a>
                         </Card.Title>
-                        <Card.Text> <i class="fas fa-location-arrow"></i> {rest.address} {rest.zipcode}</Card.Text>
+                        <Card.Text> <i class="fas fa-location-arrow"></i> {rest.street}, {rest.city}, {rest.zipcode}</Card.Text>
                         <Card.Text> {rest.Description} </Card.Text>
                         {/* <Card.Text>{event.event_description}</Card.Text> */}
                         </Card.Body>
@@ -56,16 +96,42 @@ handleClick = (e) => {
         return (
             <React.Fragment>
             <Navigationbar />
-            <div class="container">
-            {/* <h5 style={{marginTop:"25px", float:"left", fontWeight:"bold"}}> Add to the event list</h5>
-            <Button href="/addEvent" style={{marginTop:"15px", float:"right", backgroundColor:"red"}}> Create an event </Button><br/><br/>
-            <hr /> */}
-            <h2 style={{textAlign:"center", marginTop:"10px"}}>List of Restaurant</h2>
+            <div >
+            <div class= "col-md-2" style={{float: "left"}}>
+                       <h4 style={{ margin: "15px",color:"red"}}> Delivery Method </h4> 
+                       <hr />
+                       <Form onSubmit={this.handleFilter}>
+                       <Form.Check
+                            id = 'Yelp delivery'
+                            label='Yelp delivery'
+                            onChange={this.handleCheckboxChange}
+                            style={{marginLeft:"10px" }}
+                        />
+                        <Form.Check
+                            id = 'Dine In'
+                            label='Dine In'
+                            onChange={this.handleCheckboxChange}
+                            style={{marginLeft:"10px" }}
+                        />
+                        <Form.Check
+                            id = 'Curbside pickup'
+                            label='Curbside pickup'
+                            onChange={this.handleCheckboxChange}
+                            style={{marginLeft:"10px" }}
+                        />
+                        <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleReset}> Remove filters </Button>
+                        </Form>
+                    </div>  
+            <div class="col-md-8" style={{float: "right"}}>
+            <h2 style={{textAlign:"center", marginTop:"10px", color: "red"}}>List of Restaurant</h2>
             <hr />
             <CardGroup>
                 {renderRest}
-            </CardGroup>      
+            </CardGroup> 
             </div>
+               
+            </div>
+
             </React.Fragment>
         )}
 }

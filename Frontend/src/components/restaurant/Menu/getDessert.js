@@ -27,16 +27,23 @@ export class getDessert extends Component {
     }
 
     render () {
-        console.log(this.state.dessertList);
+
+       
         let renderDessert = this.state.dessertList.map(menu => {
+            var fileName = menu.fileText
+            var imgSrc = `${backendServer}/yelp/upload/restaurant/${fileName}`
             return (
                 <div>
-                    <Card>
-                        <Card.Title>{menu.dish_name} </Card.Title>
-                        <Card.Text>{menu.ingredients}</Card.Text>
-                        <Card.Text>{menu.description}</Card.Text>
-                        <Card.Text> ${menu.price}</Card.Text>
-                        <Button> <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link> </Button>
+                    <Card style={{borderLeft: "none", borderBottom: "none"}}>
+                        <Card.Img src = {imgSrc} style={{width: "500px", height: "420px"}}></Card.Img>
+                        <Card.Title style={{margin: "10px", fontSize: "25px"}}>{menu.dish_name} </Card.Title>
+                        <Card.Text style={{margin: "10px"}}>{menu.ingredients}</Card.Text>
+                        <Card.Text style={{margin: "10px"}}>{menu.description}</Card.Text>
+                        <Card.Text style={{margin: "10px"}}> ${menu.price}</Card.Text>
+                        <div>
+                        <Button style={{backgroundColor:"red", border: "1px solid red", marginLeft: "10px"}}> 
+                        <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link> </Button>
+                        </div>
                     </Card>
                     <br/>
                     <br/>

@@ -13,42 +13,66 @@ class viewRest extends Component {
         this.state = {
             restList: [],
             tempRestList: [],
-            searchKeyword: "",
+            searchKeyword: null,
             searchCategory: 0
         };
+        //console.log(props);
     }
 
 componentDidMount () {
-    axios.get(`${backendServer}/yelp/restProfile`)
-    .then(res => {
-        this.setState({ restList: res.data, tempRestList: res.data});
-    });
-    // if(this.props.location.state.searchKeyword === '') {
-    //     console.log('hello');
-    //     this.setState(
-    //       {
-    //         searchCategory: this.props.location.state.searchCategory,
-    //         searchKeyword: this.props.location.state.searchKeyword,
-    //       },
-    //       () => {
-    //         axios.get(`${backendServer}/restureSearch/${this.state.searchCategory}/${this.state.searchKeyword}`)
-    //           .then((response) =>
-    //             this.setState({
-    //               data: response.data,
-    //             }),
-    //           )
-    //           .catch((error) => {
-    //             console.log(error);
-    //           });
-    //       },
-    //     );
-    //   }
+    console.log(this.props.location.state.searchKeyword)
+    if (this.props.location.state && this.props.location.state.searchKeyword !== 'undefined') {
+        this.setState({
+            searchCategory: this.props.location.state.searchCategory,
+            searchKeyword: this.props.location.state.searchKeyword,
+          },
+          () => {
+          axios.get(`${backendServer}/restaurantSearch/${this.state.searchKeyword}/${this.state.searchCategory}`,)
+            .then((response) => {
+              console.log(response)
+                this.setState({
+                  restList: response.data, tempRestList: response.data
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          },
+        );
+    };
 }
 
+componentDidUpdate() {
+    if (
+      this.props.location.state &&
+      this.state.searchKeyword !== this.props.location.state.searchKeyword
+    ) {
+      this.setState(
+        {
+            searchKeyword: this.props.location.state.searchKeyword,
+            searchCategory: this.props.location.state.searchCategory,
+        },
+        () => {
+          axios
+            .get(
+              `${backendServer}/restaurantSearch/${this.state.searchKeyword}/${this.state.searchCategory}`,
+            )
+            .then((response) =>
+              this.setState({
+                tempRestList: response.data
+              }),
+            )
+            .catch((error) => {
+              console.log(error);
+            });
+        },
+      );
+    }
+  }
 
 handleCheckboxChange = (e) => {
     e.preventDefault();
-    //this.setState({delivery_method: e.target.id})
+    this.setState({delivery_method: e.target.id})
     let delivery_method = e.target.id;
     console.log(delivery_method)
     let filteredData = this.state.restList.filter(order =>
@@ -85,7 +109,8 @@ handleClick = (e) => {
                             <a id = {rest.rest_id} name={rest.name} onClick={this.handleClick}>{rest.name} </a>
                         </Card.Title>
                         <Card.Text> <i class="fas fa-location-arrow"></i> {rest.street}, {rest.city}, {rest.zipcode}</Card.Text>
-                        <Card.Text> {rest.Description} </Card.Text>
+                        <Card.Text> <i class="fas fa-bread-slice"></i> {rest.cuisine} </Card.Text>
+                        <Card.Text> <i class="fas fa-check" style={{color: "green"}}></i> {rest.delivery_method} </Card.Text>
                         {/* <Card.Text>{event.event_description}</Card.Text> */}
                         </Card.Body>
                     </Card>
@@ -122,7 +147,7 @@ handleClick = (e) => {
                         <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleReset}> Remove filters </Button>
                         </Form>
                     </div>  
-            <div class="col-md-8" style={{float: "right"}}>
+            <div class="col-md-10" style={{float: "right"}}>
             <h2 style={{textAlign:"center", marginTop:"10px", color: "red"}}>List of Restaurant</h2>
             <hr />
             <CardGroup>

@@ -47,7 +47,7 @@ handleOnClick = (e) => {
                             <Card.Text>{event.event_description}</Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                                <Link to = {{pathname: `/regUser/${event.event_id}`}}> Registered people </Link>
+                                <Link to = {{pathname: `/regUser/${event.event_id}`}} style={{color: "red"}}> Registered people </Link>
                             </Card.Footer>
                         </Card>
                     </div>
@@ -57,10 +57,11 @@ handleOnClick = (e) => {
             <React.Fragment>
             <Navigationbar />
             <div class="container">
-            <h5 style={{marginTop:"25px", float:"left", fontWeight:"bold"}}> Add to the event list</h5>
-            <Button href="/addEvent" style={{marginTop:"15px", float:"right", backgroundColor:"red"}}> Create an event </Button><br/><br/>
+            <h5 style={{marginTop:"25px", float:"left", fontWeight:"bold"}}> Add an event </h5>
+            <Button href="/addEvent" style={{marginTop:"15px", float:"right", backgroundColor:"red", border: "1px solid red"}}> Create an event </Button><br/><br/>
             <hr />
-            <h2 style={{textAlign:"center"}}>List of events</h2>
+            <h2 style={{textAlign:"center", color: "red"}}>Events</h2>
+            <br />
                     <CardGroup>
                             {renderEvents}
                     </CardGroup>

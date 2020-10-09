@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import Navigationbar from '../navigation';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Form, Button, Carousel} from 'react-bootstrap';
-import rest1 from './../images/rest1.jpg'
-import rest2 from './../images/rest2.jpg'
-import food1 from './../images/food1.jpg'
-import food2 from './../images/food2.jpg'
 import axios from 'axios';
 import backendServer from "../../backendServer";
 

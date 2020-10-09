@@ -40,16 +40,18 @@ class Login extends Component {
         let redirectVar = null;
         let message = ""
         if(this.props.user && this.props.user.user_id){
+            localStorage.setItem("user", 'True')
             localStorage.setItem("email_id", this.props.user.email);
             localStorage.setItem("first_name", this.props.user.first_name);
             localStorage.setItem("user_id", this.props.user.user_id);
             localStorage.setItem("last_name", this.props.user.last_name);
-            localStorage.setItem("rest_name", this.props.user.name);
-            localStorage.setItem("rest_id", this.props.user.rest_id);
+            // localStorage.setItem("rest_name", this.props.user.name);
+            // localStorage.setItem("rest_id", this.props.user.rest_id);
             
             redirectVar = <Redirect to="/home" />
         } else if (this.props.user && this.props.user.rest_id)
         {
+            localStorage.setItem("user", 'False');
             localStorage.setItem("rest_id", this.props.user.rest_id);
             localStorage.setItem("rest_name", this.props.user.name);
             localStorage.setItem("rest_email", this.props.user.email);
@@ -92,7 +94,7 @@ class Login extends Component {
                                                     <input type='checkbox'/> Remember me
                                                 </label>
                                             </div>
-                                            <button type='submit' class='btn btn-danger btn-block' style={{marginTop:"10px"}}> Sign In </button>
+                                            <button type='submit' class='btn btn-danger btn-block' style={{marginTop:"10px", backgroundColor: "red"}}> Sign In </button>
                                         </form>
                                     </div>
                                     <div class='col-md-4 col-sm-4 col-xs-12'></div>

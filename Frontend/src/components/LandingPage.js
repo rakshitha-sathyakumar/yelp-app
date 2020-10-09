@@ -20,9 +20,8 @@ class LandingPage extends Component {
         return (
             <div style={backgroundImagePic}>
                 <div>
-                    <Button style = {{margin:"25px 15px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link">Write a review</Button> {' '}
-                    <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Events</Button> {' '}
-                    <Button style = {{margin:"25px 15px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> Talk </Button>
+                    <Button style = {{margin:"25px 0px", marginLeft: "10px", backgroundColor: "transparent", fontSize: "20px", border: 'none', color: "black"}} variant="link"> <i class="fas fa-calendar"></i> Events</Button> {' '}
+                    <Button style = {{margin:"25px 0px", backgroundColor: "transparent", border: 'none', fontSize: "20px", color: "black", outline: 'none'}} variant='link'> <i class="fas fa-utensils"></i> Restaurant</Button> {' '}
                     <a href ='/login' class="btn bg-transparent float-right" style={{marginTop: "25px", marginRight: "45px", border: "1px solid black"}} role="button"> Login </a>
                     <a href ='/customerSignup' class="btn bg-transparent float-right" style={{marginTop:"25px", marginRight: "10px", border: "1px solid black"}}role="button"> Sign Up </a>
                 </div>
@@ -30,9 +29,8 @@ class LandingPage extends Component {
                     <center>
                         <Image src={CustomerCarousel}/>
                             <Form inline>
-                                <input style={{marginLeft: "200px", width: "400px", height: "40px", border: "none"}} type="text" placeholder="restaurants, delivery..."/>
-                                <input style={{width: "400px", height: "40px", border: "none", borderLeft: "1px solid black"}} type='text' placeholder='address..'/>
-                                <button style ={{width: "60px", height:"40px", background: "red", color: "white", border: "1px solid red", cursor: "pointer"}} type="submit"><i class="fa fa-search"></i></button>
+                                <input style={{marginLeft: "200px", width: "700px", height: "40px", border: "1px solid black", borderRadius: "5px"}} type="text" placeholder="restaurants, delivery..."/>
+                                <button style ={{ marginLeft: "5px",width: "60px", height:"40px", background: "red", color: "white", border: "1px solid red", borderRadius: "5px", cursor: "pointer"}} type="submit"><i class="fa fa-search"></i></button>
                             </Form>
                     </center>
                 </div>

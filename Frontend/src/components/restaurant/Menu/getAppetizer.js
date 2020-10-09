@@ -20,28 +20,32 @@ export class getAppetizer extends Component {
     componentDidMount() {
         axios.get(`${backendServer}/yelp/viewMenu/appetizer/${localStorage.getItem("rest_id")}`)
         .then(res => {
-            //console.log(res.data)
+            console.log(res.data)
             this.setState({ appetizerList: res.data });
             //console.log(this.state.appetizerList);
         });
     }
 
     render () {
-        console.log(this.state.appetizerList);
         let renderAppetizer = this.state.appetizerList.map(menu => {
+            var fileName = menu.fileText
+            var imgSrc = `${backendServer}/yelp/upload/restaurant/${fileName}`
             return (
-                <div>
-                    <Card>
-                        <Card.Title style={{margin: "10px"}}>{menu.dish_name} </Card.Title>
+                    <div>
+                    <Card style={{borderLeft: "none", borderBottom: "none"}}>
+                        <Card.Img src = {imgSrc} style={{width: "500px", height: "420px"}}></Card.Img>
+                        <Card.Title style={{margin: "10px", fontSize: "25px"}}>{menu.dish_name} </Card.Title>
                         <Card.Text style={{margin: "10px"}}>{menu.ingredients}</Card.Text>
                         <Card.Text style={{margin: "10px"}}>{menu.description}</Card.Text>
                         <Card.Text style={{margin: "10px"}}> ${menu.price}</Card.Text>
-                        <Button>
+                        <div>
+                        <Button style={{backgroundColor:"red", border: "1px solid red", marginLeft: "10px"}}>
                         <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link></Button>
+                        </div>
                     </Card>
                     <br/>
-                    <br/>
-                </div> 
+                    <br />
+                    </div>
             )
         })
         return (
@@ -49,10 +53,9 @@ export class getAppetizer extends Component {
                 <Navigationbar/>
                 <div class="container">
                     <center>
-                    <h1 style={{margin: "10px"}}> List of Appetizers </h1>
+                    <h1 style={{margin: "10px", color: "red", fontSize: "40px"}}> Appetizers </h1>
                     </center>
                         {renderAppetizer}
-        
                 </div>
             </React.Fragment>
             

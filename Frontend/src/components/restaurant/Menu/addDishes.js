@@ -17,12 +17,10 @@ class updateDishes extends Component {
       dish_name: "",
       ingredients: "",
       price: "",
+      fileText: "",
       description: "",
-      category: ""
+      category: "", 
     };
-    this.onChange = this.onChange.bind(this);
-    this.handleRadio = this.handleRadio.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange = (e) => {
@@ -37,6 +35,36 @@ handleRadio = (e) => {
   });
 }
 
+onImageChange = (e) => {
+  if(e.target.files && e.target.files[0]) {
+    this.setState({
+      file: e.target.files[0],
+      fileText: e.target.files[0].name,
+    });
+  }
+}
+
+handleImageUpload = (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('image', this.state.file);
+  const uploadConfig = {
+    headers: {
+      'content-type': 'multipart/form-data',
+    }
+  };
+  axios.post(`${backendServer}/yelp/upload/item`, formData, uploadConfig)
+  .then(response => {
+      alert("Image uploaded successfully!");
+      this.setState({
+          user_image: response.data
+        });
+      })
+      .catch(err => {
+      console.log("Error");
+  });
+}
+
 onSubmit = (e) => {
   e.preventDefault();
   const data = {
@@ -45,12 +73,15 @@ onSubmit = (e) => {
     ingredients: this.state.ingredients,
     price: this.state.price,
     description: this.state.description,
-    category: this.state.category
+    category: this.state.category,
+    fileText: this.state.fileText
   }
+  console.log(data)
   return axios.post(`${backendServer}/yelp/addDish`,data)
   .then((response) => {
-    if (response.status === 'DISH_ADDED') {
+    if (response.status === 200) {
       alert("Dish added")
+      window.location = "/restaurant"
     }
   })
   .catch(function(error) {
@@ -58,6 +89,7 @@ onSubmit = (e) => {
   })
 }
     render() {
+      console.log(this.state.fileText)
       return (
         <React.Fragment>
           <Navigationbar />
@@ -119,12 +151,13 @@ onSubmit = (e) => {
                     <Form.Check 
                     name="beverages" onChange={this.handleRadio} label="Beverages" />
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>
-                        <strong>Add Dish photo</strong>
-                    </Form.Label>
-                    <Form.File id="exampleFormControlFile1"/>
-                </Form.Group>
+                <form >
+                  <div class="custom-file">
+                    <input type="file" name="image" accept="image/*" onChange={this.onImageChange} required/>
+                  </div>
+                  <br />
+                 <Button type="submit" variant="primary" onClick={this.handleImageUpload}>Upload</Button>
+                </form> <br />
                 <Button variant='danger' type='submit'>
                   Save Changes
                 </Button>

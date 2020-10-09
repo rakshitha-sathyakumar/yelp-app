@@ -46,6 +46,7 @@ class userRestpage extends Component {
 }
     
     render() {
+        console.log(this.state.restProfile);
         let renderReview = this.state.reviewList.map(review => {
             return (
                 <div class='col-md-10'>
@@ -97,12 +98,9 @@ class userRestpage extends Component {
                 <Button href = '/events' style = {{backgroundColor: "transparent", fontSize: "20px", border: '1px solid black', color: 'black'}} variant="link"><i class="fas fa-calendar-week"></i>  Events</Button>
                 </div>
                 <hr />
-                <h3> Covid-19 Updates </h3> {'  '}
-                <h6> Updated services</h6>
-                <br />
+                <h5 style={{textDecoration: "underline"}}> Available delivery method </h5> {'  '}
                 <div>
-                    <p style={{float: "left"}}> <i class="fas fa-check" style={{color: "green"}}></i> Take out</p>
-                    <p style={{float: "left", marginLeft: "10px"}}> <i class="fas fa-check" style={{color: "green"}}></i> Delivery</p>
+                    <p style={{float: "left"}}> <i class="fas fa-check" style={{color: "green"}}></i> {this.state.restProfile.delivery_method}</p>
                 </div>
                 <br/>
                 <hr />
@@ -118,9 +116,10 @@ class userRestpage extends Component {
                 <p>
                 <i class='fas fa-envelope'></i> {this.state.restProfile.email}</p>
                 <hr/>
-                <a href='/viewDish'>
+                <a href='/userMenu'>
                 <span>
                 <i class="fas fa-utensils"></i></span> Full menu</a>
+                <hr />
             </div>
             </div>
         </React.Fragment>

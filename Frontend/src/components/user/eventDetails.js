@@ -28,7 +28,7 @@ export class eventDetails extends Component {
         }
         return axios.post(`${backendServer}/yelp/addEvent/update`,data)
         .then((response) => {
-            if (response.status === 'REGISTERED') {
+            if (response.status === 200) {
                 alert("Event added")
                 window.location = '/allEvents'
             }

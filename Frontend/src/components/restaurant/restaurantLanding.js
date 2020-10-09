@@ -7,7 +7,7 @@ import profilepic from './../images/download.png'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Carousel} from 'react-bootstrap';
+import { Button, Carousel, Form, FormGroup} from 'react-bootstrap';
 import rest1 from './../images/rest1.jpg'
 import rest2 from './../images/rest2.jpg'
 import food1 from './../images/food1.jpg'
@@ -105,20 +105,14 @@ class RestaurantPage extends Component {
                     <p style={{float: "left", color: "green"}}>Open</p>
                     <p style={{float: "left", marginLeft: "10px"}}>{this.props.user.timings}</p>
                 </div>
-                <div class="inline-block">
-                <Button href = '/userProfile' style = {{backgroundColor: "red", fontSize: "20px", border: '1px solid red', color: "white"}} variant="link"> <i class='fas fa-star'></i> Write a review</Button> {' '}
-                <Button href = '/userProfile' style = {{backgroundColor: "transparent", fontSize: "20px", border: '1px solid black', color: 'black'}} variant="link"><i class='fas fa-camera'></i> Add a photo</Button> {' '}
-                <Button href = '/events' style = {{backgroundColor: "transparent", fontSize: "20px", border: '1px solid black', color: 'black'}} variant="link"><i class="fas fa-calendar-week"></i>  Events</Button>
-                </div>
+                <Button href='/viewDish' style = {{backgroundColor: "red", fontSize: "20px", border: '1px solid red', color: 'white'}} variant="link" ><i class="fas fa-utensils"></i> Menu </Button> {' '}
+                <Button href = '/events' style = {{marginLeft: "10px", backgroundColor: "red", fontSize: "20px", border: '1px solid red', color: 'white'}} variant="link"><i class="fas fa-calendar-week"></i>  Events </Button> {' '}
+                <Button href = '/restOrders' style = {{marginLeft: "10px", backgroundColor: "red", fontSize: "20px", border: '1px solid red', color: 'white'}} variant="link"><i class="fas fa-cart-arrow-down"></i>  Orders </Button>
                 <hr />
-                <h3> Covid-19 Updates </h3> {'  '}
-                <h6> Updated services</h6>
-                <br />
+                <h5 style={{textDecoration:"underline"}}> Available Delivery Methods </h5> {'  '}
                 <div>
-                    <p style={{float: "left"}}> <i class="fas fa-check" style={{color: "green"}}></i> Take out</p>
-                    <p style={{float: "left", marginLeft: "10px"}}> <i class="fas fa-check" style={{color: "green"}}></i> Delivery</p>
+                    <p> <i class="fas fa-check" style={{color: "green"}}></i>  {this.props.user.delivery_method}</p>
                 </div>
-                <br/>
                 <hr />
                 <h4> Review Hightlights</h4>
                 <hr />
@@ -138,11 +132,17 @@ class RestaurantPage extends Component {
                 <hr />
                 <a href='/addDish'>
                 <span>
-                <i class="far fa-plus-square"></i></span> Add/Edit dishes</a>
+                <i class="far fa-plus-square"></i></span> Add dishes</a>
                 <hr />
-                <a href='/viewDish'>
+                {/* <a href='/viewDish'>
                 <span>
                 <i class="fas fa-utensils"></i></span> Full menu</a>
+                <hr /> */}
+                {/* <a href='/restOrders'>
+                <span>
+                <i class="fas fa-cart-arrow-down"></i></span> View orders
+                </a>
+                <hr /> */}
             </div>
             </div>
         </React.Fragment>

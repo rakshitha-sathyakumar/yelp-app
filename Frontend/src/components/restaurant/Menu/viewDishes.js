@@ -17,7 +17,13 @@ import axios from 'axios';
 class viewDish extends Component {
     constructor(props) {
         super(props);
-        this.state ={};
+        this.state = {
+            appetizer: "Appetizer",
+            salad: "Salads",
+            maincourse: "Main course",
+            desser: "Dessert",
+            beverages: "Beverages"
+        };
     }
 
     render() {

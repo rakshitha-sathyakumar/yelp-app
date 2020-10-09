@@ -31,11 +31,16 @@ handleUpdate = (e) => {
   e.preventDefault();
   const data = {
     name: e.target.name.value,
-    address: e.target.address.value,
+    street: e.target.street.value,
+    city: e.target.city.value,
+    zipcode: e.target.zipcode.value,
     email: e.target.email.value,
     contact_info: e.target.contact_info.value,
-    timings: e.target.timings.value
+    timings: e.target.timings.value,
+    cuisine: e.target.cuisine.value,
+    delivery_method: e.target.delivery.value
   }
+  console.log(data);
   this.props.updateRest(data);
 };
     render() {
@@ -45,11 +50,12 @@ handleUpdate = (e) => {
           <div class='container'>
             <div class='row'>
               <div class='col-md-6' style={{ marginBottom: '5%' }}>
+                <br />
                 <h3 style={{ margin: "15px, 0px", color: 'red', float: 'left' }}>Restaurant Profile</h3>
                 <br />
                 <hr class='mb-3'></hr>
                 <Form onSubmit ={this.handleUpdate}>
-                <Form.Group controlId='firstName'>
+                <Form.Group controlId='name'>
                   <Form.Label style={{margin: "0px", padding: "0px"}}>
                     <strong >Name</strong>
                   </Form.Label>
@@ -58,14 +64,32 @@ handleUpdate = (e) => {
                   </Form.Text>
                   <Form.Control name="name" onChange={this.onChange} defaultValue={this.props.user.name} type='text' />
                 </Form.Group>
-                <Form.Group controlId='lastName'>
+                <Form.Group controlId='street'>
                   <Form.Label style={{margin: "0px", padding: "0px"}}>
-                    <strong>Address</strong>
+                    <strong>Street</strong>
                   </Form.Label>
                   <Form.Text style={{margin: "0px", padding: "0px"}} className='text-muted'>
                     This field is required.
                   </Form.Text>
-                  <Form.Control name="address" onChange={this.onChange} defaultValue={this.props.user.address} type='text' />
+                  <Form.Control name="street" onChange={this.onChange} defaultValue={this.props.user.street} type='text' />
+                </Form.Group>
+                <Form.Group controlId='city'>
+                  <Form.Label style={{margin: "0px", padding: "0px"}}>
+                    <strong>City</strong>
+                  </Form.Label>
+                  <Form.Text style={{margin: "0px", padding: "0px"}} className='text-muted'>
+                    This field is required.
+                  </Form.Text>
+                  <Form.Control name="city" onChange={this.onChange} defaultValue={this.props.user.city} type='text' />
+                </Form.Group>
+                <Form.Group controlId='zipcode'>
+                  <Form.Label style={{margin: "0px", padding: "0px"}}>
+                    <strong>Zipcode</strong>
+                  </Form.Label>
+                  <Form.Text style={{margin: "0px", padding: "0px"}} className='text-muted'>
+                    This field is required.
+                  </Form.Text>
+                  <Form.Control name="zipcode" onChange={this.onChange} defaultValue={this.props.user.zipcode} type='text' />
                 </Form.Group>
                 <Form.Group controlId='contact'>
                   <Form.Label style={{margin: "0px", padding: "0px"}}>
@@ -94,13 +118,32 @@ handleUpdate = (e) => {
                   </Form.Text>
                   <Form.Control name="timings" onChange={this.onChange} defaultValue={this.props.user.timings}type='text' />
                 </Form.Group>
+                <Form.Group controlId='cuisine'>
+                  <Form.Label style={{margin: "0px", padding: "0px"}}>
+                    <strong>Cuisine</strong>
+                  </Form.Label>
+                  <Form.Text style={{margin: "0px", padding: "0px"}} className='text-muted'>
+                  This field is required.
+                  </Form.Text>
+                  <Form.Control name="cuisine" onChange={this.onChange} defaultValue={this.props.user.cuisine}type='text' />
+                </Form.Group>
+                <Form.Group controlId='delivery'>
+                  <Form.Label style={{margin: "0px", padding: "0px"}}>
+                    <strong>Delivery method</strong>
+                  </Form.Label>
+                  <Form.Text style={{margin: "0px", padding: "0px"}} className='text-muted'>
+                  This field is required.
+                  </Form.Text>
+                  <Form.Control name="delivery" onChange={this.onChange} defaultValue={this.props.user.delivery_method}type='text' />
+                </Form.Group>
+                <Form.Group></Form.Group>
                 <Form.Group>
                     <Form.Label>
                         <strong>Add a photo</strong>
                     </Form.Label>
                     <Form.File id="exampleFormControlFile1"/>
                 </Form.Group>
-                <Button variant='danger' type='submit'>
+                <Button style={{backgroundColor: "red", border: "1px solid red"}} type='submit'>
                   Save Changes
                 </Button>
                 <a href='/restaurant' style={{ marginLeft: '15px' }}>

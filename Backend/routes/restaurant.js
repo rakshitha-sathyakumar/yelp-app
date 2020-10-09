@@ -26,7 +26,7 @@ router.get('/:rest_id', (req, res) => {
 
 router.post('/update/:rest_id', (req, res) => {
   console.log(req.params.rest_id);
-    let sql = `CALL update_restaurant('${req.params.rest_id}', '${req.body.name}', '${req.body.address}', '${req.body.email}', '${req.body.contact_info}', '${req.body.timings}');`;
+    let sql = `CALL update_restaurant('${req.params.rest_id}', '${req.body.name}', '${req.body.street}','${req.body.city}','${req.body.zipcode}', '${req.body.email}', '${req.body.contact_info}', '${req.body.timings}','${req.body.cuisine}', '${req.body.delivery_method}');`;
     pool.query(sql, (err, result) => {
       console.log(result);
       if (err) {

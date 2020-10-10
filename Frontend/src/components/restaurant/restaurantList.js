@@ -5,7 +5,13 @@ import illusionsImage from '../images/restList.jpg';
 import {Button, Card, CardGroup, Form} from 'react-bootstrap';
 import axios from 'axios';
 import backendServer from "../../backendServer";
+import MapSection from '../maps'
 
+const location = {
+  address: '1600 Amphitheatre Parkway, Mountain View, california.',
+  lat: 37.42216,
+  lng: -122.08427,
+}
 
 class viewRest extends Component {
     constructor(props) {
@@ -154,6 +160,7 @@ handleClick = (e) => {
                 {renderRest}
             </CardGroup> 
             </div>
+            <MapSection location={location} zoomLevel={17} />
                
             </div>
 

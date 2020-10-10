@@ -10,13 +10,14 @@ import { Link } from 'react-router-dom';
 import { Jumbotron, CardImg} from 'react-bootstrap';
 import YelpImage from './../images/yelp_logo.jpg'
 import axios from 'axios';
+import backendServer from "../../backendServer";
 
 class userProfile extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        this.onChange = this.onChange.bind(this);
-        this.onUpdate = this.onUpdate.bind(this);
+        this.state = {
+            fileText: ''
+        };
     }
 
     componentWillMount() {
@@ -24,37 +25,82 @@ class userProfile extends Component {
         // console.log(this.props)
     }
 
-    onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
+    // onChange = (e) => {
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
-    onUpdate = (e) => {
+    handleUpdate = (e) => {
         //prevent page from refresh
         e.preventDefault();
+        const data = {
+            fileText: this.state.fileText, 
+            user_id: localStorage.getItem("user_id")
+        }
+        return axios.post(`${backendServer}/yelp/userProfile/updateProfilePic`, data)
+        .then((response) => {
+            if (response.status === 200) {
+              alert("Profilepic added")
+              //window.location = "/userProfile"
+            }
+          })
+          .catch(function(error) {
+             alert("Error")
+          })
+        }
 
-        let data = Object.assign({}, this.state);
-        this.props.updateUser(data);
-    };
+    onImageChange = (e) => {
+        if(e.target.files && e.target.files[0]) {
+          this.setState({
+            file: e.target.files[0],
+            fileText: e.target.files[0].name,
+          });
+          console.log(this.state.fileText)
+        }
+      }
+      
+      
+      handleImageUpload = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', this.state.file);
+        const uploadConfig = {
+          headers: {
+            'content-type': 'multipart/form-data',
+          }
+        };
+        axios.post(`${backendServer}/yelp/upload/item`, formData, uploadConfig)
+        .then(response => {
+            alert("Image uploaded successfully!");
+            this.setState({
+                user_image: response.data
+              });
+            })
+            .catch(err => {
+            console.log("Error");
+        });
+
+      }
 
 
     render() {
-        console.log("hi")
-        console.log(this.props);
+        console.log(this.props.user);
+        var fileName = this.props.user.fileText
+        var imgSrc = `${backendServer}/yelp/upload/restaurant/${fileName}`
         return (
         <div style={{margin:"5px"}}>
             <Navigationbar />
             <div class='jumbotron'>
                     <div class='row'>
                         <div class='col-xs-3 card profilePic' style={{position:"absolute"}}>
-                            <label for='profileImage'>
+                            {/* <label for='profileImage'>
                                     <a class='btn btn-secondary btn-sm btn-rounded'>
                                         <i class='fas fa-camera'></i></a>
                             </label>
-                            <input type='file' name='profileImage' id='profileImage' style={{ display: 'none' }} value='' onChange={this.changeProfileImage}></input>
+                            <input type='file' name='profileImage' id='profileImage' style={{ display: 'none' }} value='' onChange={this.changeProfileImage}></input> */}
                             <card>
-                                <CardImg variant='top' src={profilepic} className='profileImg'/>
+                                <CardImg style={{height: "300px", width: "225px"}}variant='top' src={imgSrc} className='profileImg'/>
                             </card>
                         </div>
                         <div class='col-xs-4 profileName' style={{position: "relative", marginLeft: "250px"}}>
@@ -67,12 +113,15 @@ class userProfile extends Component {
                         <div class='col-xs-4' style={{marginLeft: '300px'}}>
                             <ul class='list-unstyled'>
                                 <li>
-                                    <a href='#'>
-                                        <span>
-                                            <i class='fas fa-camera'></i>{' '}
-                                        </span>
-                                        Add Profile Photo
-                                    </a>
+
+                                <label for='profileImage'>
+                                    <a class='btn btn-secondary btn-sm btn-rounded'>
+                                        <i class='fas fa-camera'></i> Add profile photo</a>
+                            </label>
+                            <input type='file' name='profileImage' id='profileImage' style={{ display: 'none'}} value='' onChange = {this.onImageChange}></input>{' '}
+                            <a class="link" onClick={this.handleImageUpload}> Upload</a>{' '}
+                            <a class="link" onClick={this.handleUpdate}> Save </a>
+                            
                                 </li>
                                 <li>
                                     <a href='/update'>

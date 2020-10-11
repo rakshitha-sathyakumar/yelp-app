@@ -22,13 +22,13 @@ class RestaurantSignup extends Component {
 
 
     onSubmit = (e) => {
-        //prevent page from refresh
+        console.log(this.state.street)
         e.preventDefault();
         const data = {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            address: this.state.address,
+            street: this.state.street,
             zipcode: this.state.zipcode,
         }
 
@@ -89,7 +89,7 @@ class RestaurantSignup extends Component {
                                             <input type="password" class="form-control" name="password" onChange={this.onChange} placeholder="Password" required />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="address" onChange={this.onChange} placeholder="Address" required />
+                                            <input type="text" class="form-control" name="street" onChange={this.onChange} placeholder="Street" required />
                                         </div>
                                         <div class="d-inline-flex form-group">
                                             <input style={{width: "300px"}}type="text" class="form-control" name="zipcode" onChange={this.onChange} placeholder="zipcode" required />

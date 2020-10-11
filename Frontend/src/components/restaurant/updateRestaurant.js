@@ -9,11 +9,16 @@ import profilepic from './../images/download.png'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Form, Button} from 'react-bootstrap';
+import axios from 'axios';
+import backendServer from "../../backendServer";
+import { bindActionCreators } from 'redux';
 
 class updateRestaurant extends Component {
   constructor(props) {
     super(props);
-    this.state={};
+    this.state = {
+      fileText: ''
+    };
   }
   
 componentWillMount() {
@@ -27,6 +32,37 @@ onChange= (e) => {
   })
 }
 
+onImageChange = (e) => {
+  if(e.target.files && e.target.files[0]) {
+    this.setState({
+      file: e.target.files[0],
+      fileText: e.target.files[0].name,
+    });
+  }
+}
+
+
+handleImageUpload = (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('image', this.state.file);
+  const uploadConfig = {
+    headers: {
+      'content-type': 'multipart/form-data',
+    }
+  };
+  axios.post(`${backendServer}/yelp/upload/item`, formData, uploadConfig)
+  .then(response => {
+      alert("Image uploaded successfully!");
+      this.setState({
+          user_image: response.data
+        });
+      })
+      .catch(err => {
+      console.log("Error");
+  });
+}
+
 handleUpdate = (e) => {
   e.preventDefault();
   const data = {
@@ -38,14 +74,24 @@ handleUpdate = (e) => {
     contact_info: e.target.contact_info.value,
     timings: e.target.timings.value,
     cuisine: e.target.cuisine.value,
-    delivery_method: e.target.delivery.value
+    delivery_method: e.target.delivery.value,
+    fileText: this.state.fileText
   }
-  console.log(data);
   this.props.updateRest(data);
+  // if(action.payload === "RESTAURANT_UPDATED") {
+  //   alert("Resayuarnt details updated")
+  //   window.location = "/restaurant"
+  //   }
 };
+
     render() {
+      var redirectVar = null;
+      if (this.props.status === 'RESTAURANT_UPDATED') {
+        redirectVar = <Redirect to = '/restaurant' />
+      }
       return (
         <React.Fragment>
+          {redirectVar}
           <Navigationbar />
           <div class='container'>
             <div class='row'>
@@ -136,15 +182,21 @@ handleUpdate = (e) => {
                   </Form.Text>
                   <Form.Control name="delivery" onChange={this.onChange} defaultValue={this.props.user.delivery_method}type='text' />
                 </Form.Group>
-                <Form.Group></Form.Group>
                 <Form.Group>
                     <Form.Label>
                         <strong>Add a photo</strong>
                     </Form.Label>
-                    <Form.File id="exampleFormControlFile1"/>
+                    <div class="custom-file">
+                    <input type="file" name="image" accept="image/*" onChange={this.onImageChange} required/>
+                  </div>
                 </Form.Group>
+                <Button style={{backgroundColor: "red", border: "1px solid red"}} onClick={this.handleImageUpload}>
+                  Upload
+                </Button>
+                <br />
+                <br />
                 <Button style={{backgroundColor: "red", border: "1px solid red"}} type='submit'>
-                  Save Changes
+                 Save changes
                 </Button>
                 <a href='/restaurant' style={{ marginLeft: '15px' }}>
                   Cancel
@@ -161,12 +213,14 @@ handleUpdate = (e) => {
   updateRestaurant.propTypes = {
     getRest: PropTypes.func.isRequired,
     updateRest: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    status: PropTypes.object.isRequired
   }
   
   const mapStateToProps = state => { 
       return ({
-      user: state.restProfile.user
+      user: state.restProfile.user,
+      status: state.restProfile.status
   })};
   
   export default connect(mapStateToProps, { getRest, updateRest })(updateRestaurant);

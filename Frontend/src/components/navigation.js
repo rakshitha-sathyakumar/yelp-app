@@ -95,6 +95,7 @@ render() {
                         <option value='2'>Location</option>
                         <option value='3'>Cuisine</option>
                         <option value='4'>Dish Name</option>
+                        <option value='5'> Restaurant name </option>
                     </select>
                     <input style={{width:"450px" }} list="searchWord" class="form-control lg-5" type="search" placeholder="Search" aria-label="Search" autoComplete='on' onChange={this.searchChangeHandler}/>
                     <button onClick={this.handleSearch} style = {{ marginLeft: "5px", width: "60px", height:"38px", borderRadius:"5px", background: "red", color: "white", border: "1px solid red", cursor: "pointer"}} type="submit"><i class="fa fa-search"></i></button>

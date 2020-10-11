@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
         res.send("Database Error");
       }
       if (result && result.length > 0 && result[0][0].status) {
-        if (result[0][0].user_id) {
+        if (result[0][0].user_id && result[0][0].password === req.body.password) {
           let userObject = {
             user_id: result[0][0].user_id,
             first_name: result[0][0].first_name,
@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
           };
           res.end(JSON.stringify(userObject))
         } 
-        else if (result[0][0].rest_id) {
+        else if (result[0][0].rest_id && result[0][0].password === req.body.password) {
           userObject = {
             rest_id: result[0][0].rest_id,
             name: result[0][0].name,

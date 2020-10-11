@@ -5,7 +5,13 @@ import illusionsImage from '../images/restList.jpg';
 import {Button, Card, CardGroup, Form} from 'react-bootstrap';
 import axios from 'axios';
 import backendServer from "../../backendServer";
+import MapContainer from '../maps'
 
+const location = {
+  address: '1600 Amphitheatre Parkway, Mountain View, california.',
+  lat: 37.42216,
+  lng: -122.08427,
+}
 
 class viewRest extends Component {
     constructor(props) {
@@ -98,12 +104,13 @@ handleClick = (e) => {
   }
 
     render() {
-        //console.log(this.state.restList.name);
-        let renderRest = this.state.tempRestList.map(rest => {
+      let renderRest = this.state.tempRestList.map(rest => {
+          var fileName = rest.fileText
+          var imgSrc = `${backendServer}/yelp/upload/restaurant/${fileName}`
             return (
                 <div class='col-md-6'>
                     <Card style={{margin: "10px", border:"1px solid black"}}>
-                        <Card.Img variant="top" src={illusionsImage} onClick={this.handleClick} />
+                        <Card.Img id = {rest.rest_id} name={rest.name} style={{height: "150px", width: "200px"}}variant="top" src={imgSrc} onClick={this.handleClick} />
                         <Card.Body>
                         <Card.Title variant="link">  
                             <a id = {rest.rest_id} name={rest.name} onClick={this.handleClick}>{rest.name} </a>
@@ -147,16 +154,15 @@ handleClick = (e) => {
                         <Button style={{marginLeft:"10px", marginTop: "10px", backgroundColor: "red", border: "1px solid red" }} type="submit" onClick={this.handleReset}> Remove filters </Button>
                         </Form>
                     </div>  
-            <div class="col-md-10" style={{float: "right"}}>
-            <h2 style={{textAlign:"center", marginTop:"10px", color: "red"}}>List of Restaurant</h2>
+            <div class="col-md-10">
+            <h2 style={{textAlign:"center", marginTop:"10px", color: "red"}}>Restaurants</h2>
             <hr />
             <CardGroup>
                 {renderRest}
             </CardGroup> 
             </div>
-               
+            <MapContainer restaurantlist={this.state.restList}></MapContainer> 
             </div>
-
             </React.Fragment>
         )}
 }

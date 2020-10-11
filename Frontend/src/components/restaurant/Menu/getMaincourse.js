@@ -30,6 +30,7 @@ export class getMaincourse extends Component {
         
         console.log(this.state.maincourseList);
         let renderMaincourse = this.state.maincourseList.map(menu => {
+            console.log(menu)
             var fileName = menu.fileText
             var imgSrc = `${backendServer}/yelp/upload/restaurant/${fileName}`
             return (
@@ -37,8 +38,8 @@ export class getMaincourse extends Component {
                     <Card style={{borderLeft: "none", borderBottom: "none"}}>
                         <Card.Img src = {imgSrc} style={{width: "500px", height: "420px"}}></Card.Img>
                         <Card.Title style={{margin: "10px", fontSize: "25px"}}>{menu.dish_name} </Card.Title>
-                        <Card.Text style={{margin: "10px"}}>{menu.ingredients}>{menu.ingredients}</Card.Text>
-                        <Card.Text style={{margin: "10px"}}>{menu.description}>{menu.description}</Card.Text>
+                        <Card.Text style={{margin: "10px"}}>{menu.ingredients}</Card.Text>
+                        <Card.Text style={{margin: "10px"}}>{menu.description}</Card.Text>
                         <Card.Text style={{margin: "10px"}}> ${menu.price}</Card.Text>
                         <div>
                         <Button style={{backgroundColor:"red", border: "1px solid red", marginLeft: "10px"}}> <Link to = {{pathname: `/editDish/${localStorage.getItem("rest_id")}/${menu.dish_id}`}} style={{color: "white"}}> Edit dish </Link></Button>
@@ -54,7 +55,7 @@ export class getMaincourse extends Component {
             <Navigationbar/>
             <div class="container">
                 <center>
-                <h1 style={{margin: "10px"}}> List of Main course </h1>
+                <h1 style={{margin: "10px"}}> Main course </h1>
                 </center>
                     {renderMaincourse}
             </div>

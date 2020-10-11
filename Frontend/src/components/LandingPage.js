@@ -27,11 +27,12 @@ class LandingPage extends Component {
                 </div>
                 <div class='container'>
                     <center>
-                        <Image src={CustomerCarousel}/>
-                            <Form inline>
+                        <Image style={{paddingTop: "100px"}} src={CustomerCarousel}/>
+                        <h1> We Know Just The Place</h1>
+                            {/* <Form inline>
                                 <input style={{marginLeft: "200px", width: "700px", height: "40px", border: "1px solid black", borderRadius: "5px"}} type="text" placeholder="restaurants, delivery..."/>
                                 <button style ={{ marginLeft: "5px",width: "60px", height:"40px", background: "red", color: "white", border: "1px solid red", borderRadius: "5px", cursor: "pointer"}} type="submit"><i class="fa fa-search"></i></button>
-                            </Form>
+                            </Form> */}
                     </center>
                 </div>
             </div>

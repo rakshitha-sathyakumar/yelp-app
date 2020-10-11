@@ -55,7 +55,7 @@ export class getDessert extends Component {
             <Navigationbar/>
             <div class="container">
                 <center>
-                <h1 style={{margin: "10px"}}> List of Desserts </h1>
+                <h1 style={{margin: "10px"}}> Desserts </h1>
                 </center>
                     {renderDessert}
             </div>

@@ -54,7 +54,7 @@ export class getSalad extends Component {
             <Navigationbar/>
             <div class="container">
                 <center>
-                <h1 style={{margin: "10px"}}> List of Salads </h1>
+                <h1 style={{margin: "10px"}}> Salads </h1>
                 </center>
                     {renderSalad}
             </div>

@@ -17,7 +17,6 @@ class BasicDetails extends Component {
 
   componentWillMount() {
     this.props.getUser();
-    console.log(this.props)
 }
 
 onChange = (e) => {
@@ -46,21 +45,22 @@ handleUpdate = (e) => {
         }
 
   this.props.updateUser(data);
-  console.log(this.props)
 };
     render() {
+      var email = (this.props.user.email)
+      console.log(email)
       let redirectVar = null;
-      // if(this.props.user ===  "USER_UPDATED"){
-      //   localStorage.setItem("email_id", this.props.user.email);
-      // //   localStorage.setItem("first_name", this.props.user.first_name);
-      // //   localStorage.setItem("user_id", this.props.user.user_id);
-      // //   localStorage.setItem("last_name", this.props.user.last_name);
-      // //   redirectVar = <Redirect to="/userProfile"/>
-      // }
+      if(this.props.status ===  "USER_UPDATED"){
+        localStorage.setItem("email_id", {email});
+        // localStorage.setItem("first_name", this.props.user.first_name);
+        // localStorage.setItem("user_id", this.props.user.user_id);
+        // localStorage.setItem("last_name", this.props.user.last_name);
+        redirectVar = <Redirect to="/userProfile"/>
+      }
 
       return (
         <div>
-          {/* {redirectVar} */}
+          {redirectVar}
         <React.Fragment>
           <Navigationbar />
         <div class="row">
@@ -235,12 +235,14 @@ handleUpdate = (e) => {
 userProfile.propTypes = {
   getUser: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired, 
+  status: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => { 
     return ({
-    user: state.userProfile.user
+    user: state.userProfile.user,
+    status: state.userProfile.status
 })};
 
 export default connect(mapStateToProps, { getUser, updateUser })(BasicDetails);

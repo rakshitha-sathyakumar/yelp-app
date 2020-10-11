@@ -60,6 +60,7 @@ handleLogout = () => {
                 <div class='container'>
                     <center>
                         <Image style={{paddingTop: "100px"}} src={CustomerCarousel}/>
+                        <h1> We Know Just The Place</h1>
                             {/* <Form inline>
                                 <input style={{marginLeft: "200px", width: "700px", height: "40px", border: "1px solid black", borderRadius: "5px"}} type="text" placeholder="restaurants, delivery..."/>
                                 <button style ={{marginLeft: "5px", width: "60px", height:"40px", background: "red", color: "white", border: "1px solid red", cursor: "pointer", borderRadius: "5px"}} type="submit"><i class="fa fa-search"></i></button>

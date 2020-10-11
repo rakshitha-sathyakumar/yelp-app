@@ -46,7 +46,7 @@ router.get('/rest/:rest_id', (req, res) => {
 router.get('/:user_id/:order_status', (req, res) => {
     let sql = `CALL get_orderStatus('${req.params.user_id}', '${req.params.order_status}');`;
     pool.query(sql, (err, result) => {
-        console.log(result);
+        // console.log(result);
       if (err) {
         res.writeHead(500, {
           'Content-Type': 'text/plain'
@@ -66,7 +66,6 @@ router.get('/:user_id/:order_status', (req, res) => {
 router.post('/', (req, res) => {
     console.log("Hi")
     let sql = `CALL add_order('${req.body.user_id}', ' ${req.body.dish_id}', ' ${req.body.rest_id}', '${req.body.dish_name}', '${req.body.rest_name}', '${req.body.order_type}', '${req.body.first_name}', '${req.body.last_name}', '${req.body.date}', '${req.body.time}');`;
-    console.log(sql);
     pool.query(sql, (err, result) => {
         console.log(err);
       if (err) {
@@ -80,7 +79,6 @@ router.post('/', (req, res) => {
 
   router.post('/update', (req, res) => {
     let sql = `CALL update_orderStatus('${req.body.order_id}', ' ${req.body.order_status}');`;
-    console.log(sql);
     pool.query(sql, (err, result) => {
         console.log(err);
       if (err) {

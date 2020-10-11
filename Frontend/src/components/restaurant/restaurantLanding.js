@@ -60,6 +60,8 @@ class RestaurantPage extends Component {
         this.props.updateRest(data);
     };
     render() {
+        var fileName = this.props.user.fileText
+        var imgSrc = `${backendServer}/yelp/upload/restaurant/${fileName}`
         let renderReview = this.state.reviewList.map(review => {
             return (
                 <div class='col-md-10'>
@@ -73,12 +75,13 @@ class RestaurantPage extends Component {
             )
         })
       return (
+
         <React.Fragment>
           <Navigationbar />
              <div className='container-fluid' >
                 <Carousel>
                     <Carousel.Item style={{'height':"400px", margin:"0"}} >
-                        <img style={{'height':"500px"}} className="w-100" src={rest1} />
+                        <img style={{'height':"500px"}} className="w-100" src={imgSrc} />
                     </Carousel.Item>
                     <Carousel.Item style={{'height':"400px"}}>
                         <img style={{'height':"500px"}} className="w-100" src={rest2}/>
@@ -95,7 +98,7 @@ class RestaurantPage extends Component {
             <div class="col-xs-4" style={{marginLeft: "50px", textAlign: "top"}}>
                 <br />
                 <h1 style={{fontWeight: "bolder", margin:"0"}}> {this.props.user.name}</h1>
-                <p> {this.props.user.address}</p>
+                <p> {this.props.user.street}{','} {this.props.user.city}{','} {this.props.user.zipcode}</p>
                 <i class='fas fa-star' style={{color: "red"}}></i>
                 <i class='fas fa-star' style={{color: "red"}}></i>
                 <i class='fas fa-star' style={{color: "red"}}></i>

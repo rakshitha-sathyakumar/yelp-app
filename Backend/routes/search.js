@@ -23,10 +23,10 @@ router.get('/:searchKeyword/:searchCategory', (req, res) => {
   });
 
   router.get('/:keyword', (req, res) => {
-    console.log("HI")
-    console.log(req.params.keyword);
+    // console.log("HI")
+    // console.log(req.params.keyword);
       let sql = `CALL get_searchEvent('${req.params.keyword}');`;
-      console.log(sql);
+      // console.log(sql);
       pool.query(sql, (err, result) => {
           console.log(result);
           if (err) {

@@ -7,7 +7,7 @@ const pool = require('../pool.js');
 router.get('/appetizer/:rest_id', (req, res) => {
       let sql = `CALL get_appetizer('${req.params.rest_id}');`;
       pool.query(sql, (err, result) => {
-          console.log(result);
+          // console.log(result);
         if (err) {
           res.writeHead(500, {
             'Content-Type': 'text/plain'

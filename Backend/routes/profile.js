@@ -50,6 +50,30 @@ router.post('/update/:user_id', (req, res) => {
     });
   });
 
+  router.post('/updateProfilePic', (req, res) => {
+    let sql = `CALL update_profilePic('${req.body.fileText}', '${req.body.user_id}');`;
+    pool.query(sql, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.writeHead(500, {
+          'Content-Type': 'text/plain'
+        });
+        res.end("Error in Data");
+      }
+      if (result && result.length > 0 && result[0][0].status === 'PROFILEPIC_UPDATED') {
+        res.writeHead(200, {
+          'Content-Type': 'text/plain'
+        });
+        res.end(result[0][0].status);
+      }
+      else if (result && result.length > 0 && result[0][0].status === 'NO_RECORD') {
+        res.writeHead(401, {
+          'Content-Type': 'text/plain'
+        });
+        res.end(result[0][0].status);
+      }
+    });
+  });
 
 
 module.exports=router;

@@ -4,7 +4,7 @@ const router = express.Router();
 const pool = require('../pool.js');
 
 router.post('/', (req, res) => {
-    let sql = `CALL add_restaurant('${req.body.name}', '${req.body.email}', '${req.body.password}', '${req.body.address}', '${req.body.zipcode}');`;
+    let sql = `CALL add_restaurant('${req.body.name}', '${req.body.email}', '${req.body.password}', '${req.body.street}', '${req.body.zipcode}');`;
     console.log(sql);
     pool.query(sql, (err, result) => {
         console.log(err);
